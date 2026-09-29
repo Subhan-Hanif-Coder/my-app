@@ -2,10 +2,29 @@ import React, { useContext } from "react";
 import "./Cart.css";
 import { StoreContext } from "../../context/StoreContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Cart = () => {
-  const { cartItems, food_list, removeFromCart, getTotalCartAmount ,url} = useContext(StoreContext);
-  const navigate=useNavigate()
+  const { cartItems, food_list, removeFromCart, getTotalCartAmount, url, token } = useContext(StoreContext);
+  const navigate = useNavigate();
+
+  // Checkout handle karne ka function with stylish toast notification
+  const handleCheckout = () => {
+    if (!token) {
+      toast.error("🔒 Please login or signup to place order!", {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored", // Yeh notification ko mazeed stylish aur prominent banata hai
+      });
+      return;
+    }
+    navigate('/order');
+  };
+
   return (
     <div className="cart">
       <div className="cart-items">
@@ -22,14 +41,14 @@ const Cart = () => {
         {food_list.map((item, index) => {
           if (cartItems[item._id] > 0) {
             return (
-              <div>
+              <div key={index}>
                 <div className="cart-items-title cart-items-item">
                   <img src={url+"/images/"+item.image} alt="" className="cart-items" />
                   <p>{item.name}</p>
                   <p>{item.price}</p>
                   <p>{cartItems[item._id]}</p>
                   <p>{item.price * cartItems[item._id]}</p>
-                  <p onClick={() => removeFromCart(item._id)}>x</p>
+                  <p className="cross" onClick={() => removeFromCart(item._id)}>x</p>
                 </div>
                 <hr />
               </div>
@@ -56,7 +75,7 @@ const Cart = () => {
               <b>{getTotalCartAmount()===0?0:getTotalCartAmount()+2}</b>
             </div>
           </div>
-          <button onClick={()=>navigate('/order')}>PROCEED TO CHECKOUT</button>
+          <button onClick={handleCheckout}>PROCEED TO CHECKOUT</button>
         </div>
         <div className="cart-promoc">
           <strong><p>If you have a promo code ,Enter it here</p></strong>
