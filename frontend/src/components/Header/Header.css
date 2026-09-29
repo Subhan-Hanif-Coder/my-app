@@ -1,0 +1,62 @@
+.header{
+    height:34vw;
+    margin :30px auto;
+    background: url("/header_img.png"),no-repeat;
+    background-size: contain;
+position: relative;
+}
+.header-contents{
+position: absolute;
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 1.5vh;
+max-width: 50%;
+bottom: 10%;
+left:6vw;
+animation: fadeIn 1s ease-in-out;
+}
+.header-contents h2{
+    font-size: max(4.5vw, 22px);
+    color:white;
+    font-weight: 500;
+}
+.header-contents p{
+    font-size: max(1.5vw, 14px);
+    color:white;
+   
+}
+.header-contents button{
+    padding: 10px 20px;
+    border: none;
+   background:white;
+   color:tomato;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.header-contents button:hover{
+    background-color: tomato;
+    color:white;
+}
+@media (max-width: 1050px) {
+  .header {
+    height: 38vw;
+  }
+  .header-contents {
+    max-width: 45%;
+  }
+}
+
+@media (max-width: 750px) {
+  .header-contents {
+    max-width: 65%;
+  }
+  .header-contents p {
+    display: none;
+  }
+  .header-contents button {
+    padding: 2vw 4vw;
+  }
+}
