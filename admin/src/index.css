@@ -9,7 +9,8 @@
 
 body {
   min-height: 100vh;
-  background-color: #fcfcfc;
+  background-color: #f4f7f6;
+  color: #1f2937;
 }
 
 a {
@@ -22,4 +23,29 @@ input, select, textarea {
 }
 .app-content {
   display: flex;
+  min-height: calc(100vh - 65px);
+  background: #f4f7f6;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  color-scheme: light;
+}
+
+.order-loading-dark {
+  background: transparent !important;
+  color: #667588 !important;
+}
+
+.spinner-dark {
+  border-color: #dce8e3 !important;
+  border-top-color: #0f766e !important;
 }

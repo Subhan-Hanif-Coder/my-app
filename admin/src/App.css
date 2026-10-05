@@ -1,0 +1,408 @@
+.admin-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 84% 0, rgba(222, 233, 225, 0.28), transparent 35%),
+    #f6f7f4;
+  color: #202923;
+}
+
+.admin-shell .app-content {
+  min-height: calc(100vh - 76px);
+  align-items: stretch;
+  background: transparent;
+}
+
+.admin-main {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+}
+
+.admin-main > * {
+  min-width: 0;
+}
+
+.admin-main > .order-page-wrapper-dark {
+  align-self: stretch;
+}
+
+.admin-main .dashboard-page-light,
+.admin-main .add-page-dark,
+.admin-main .list-page-light,
+.admin-main .orders-page-dark {
+  padding-top: clamp(25px, 3vw, 40px);
+  padding-bottom: 54px;
+}
+
+.admin-main .saas-title-group h3 {
+  letter-spacing: -0.045em;
+}
+
+.admin-main .saas-title-group p {
+  line-height: 1.6;
+}
+
+.admin-main .widget-box-dark,
+.admin-main .report-kpi-card,
+.admin-main .report-kpi-card-circle,
+.admin-main .order-row-card,
+.admin-main .list-row-grid,
+.admin-main .saas-form-box {
+  border-radius: 15px;
+  box-shadow: 0 8px 26px rgba(35, 51, 41, 0.045);
+}
+
+.admin-main .report-kpi-card,
+.admin-main .report-kpi-card-circle {
+  min-height: 150px;
+}
+
+.admin-main .report-kpi-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-main .report-kpi-card::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 88px;
+  height: 88px;
+  border-radius: 0 0 0 88px;
+  background: rgba(232, 241, 233, 0.38);
+  content: "";
+}
+
+.admin-main .report-kpi-card-circle {
+  border-radius: 15px;
+}
+
+.admin-main .widget-box-dark {
+  padding: clamp(17px, 2vw, 23px);
+}
+
+.admin-main .order-row-card,
+.admin-main .list-row-grid {
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.admin-main .order-row-card:hover,
+.admin-main .list-row-grid:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(35, 51, 41, 0.075);
+}
+
+.admin-main .saas-btn-sync,
+.admin-main .saas-submit-btn {
+  border-radius: 9px;
+}
+
+.admin-main .toolbar-box-dark {
+  border-radius: 13px;
+  box-shadow: 0 5px 18px rgba(35, 51, 41, 0.035);
+}
+
+.admin-main .analytics-grid-dark,
+.admin-main .report-kpi-grid {
+  gap: 15px;
+}
+
+.admin-main .saas-form-box {
+  gap: 23px;
+}
+
+.admin-main .order-page-wrapper-dark {
+  animation: admin-content-in 260ms ease both;
+}
+
+@keyframes admin-content-in {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.admin-login {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: minmax(0, 1.05fr) minmax(390px, 0.95fr);
+  align-items: center;
+  gap: clamp(40px, 8vw, 120px);
+  padding: clamp(28px, 7vw, 96px);
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 6% 98%, rgba(207, 75, 50, 0.13), transparent 35%),
+    radial-gradient(ellipse at 95% 5%, rgba(95, 137, 110, 0.13), transparent 40%),
+    #f7f8f4;
+  color: #202923;
+}
+
+.admin-login-story {
+  display: flex;
+  min-height: min(690px, 80vh);
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.admin-login-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #24332b;
+  font-size: 19px;
+  font-weight: 750;
+  letter-spacing: -0.05em;
+}
+
+.admin-brand-mark {
+  display: grid;
+  width: 43px;
+  height: 43px;
+  place-items: center;
+  border-radius: 14px;
+  background: #26372e;
+  color: #fff;
+  font-family: Georgia, serif;
+  font-size: 24px;
+}
+
+.admin-brand-dot {
+  color: #cf4b32;
+}
+
+.admin-login-brand small {
+  display: block;
+  margin-top: 2px;
+  color: #849087;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+.admin-login-message {
+  max-width: 620px;
+  padding: 40px 0;
+}
+
+.admin-login-kicker,
+.admin-login-card-mark {
+  color: #8c714b;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.17em;
+}
+
+.admin-login-message h1 {
+  margin-top: 17px;
+  color: #25342c;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(42px, 5.7vw, 76px);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 1.02;
+}
+
+.admin-login-message p {
+  max-width: 430px;
+  margin-top: 22px;
+  color: #68756c;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.admin-login-footnote {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #7a867d;
+  font-size: 10px;
+}
+
+.admin-login-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #338268;
+  box-shadow: 0 0 0 4px rgba(51, 130, 104, 0.1);
+}
+
+.admin-login-card {
+  display: flex;
+  width: min(100%, 470px);
+  flex-direction: column;
+  justify-self: center;
+  padding: clamp(27px, 4vw, 45px);
+  border: 1px solid #e7e9e2;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 24px 70px rgba(35, 51, 41, 0.1);
+  backdrop-filter: blur(14px);
+}
+
+.admin-login-card h2 {
+  margin-top: 12px;
+  color: #25342c;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(24px, 2.4vw, 31px);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+
+.admin-login-card > p {
+  margin-top: 8px;
+  color: #78837b;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.admin-login-card label {
+  margin-top: 27px;
+  color: #3c4b41;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.admin-login-card input {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 8px;
+  padding: 0 13px;
+  border: 1px solid #dce3dc;
+  border-radius: 9px;
+  outline: none;
+  background: #fbfcfa;
+  color: #25342c;
+  font: inherit;
+  font-size: 12px;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.admin-login-card input:focus {
+  border-color: #6e9c84;
+  box-shadow: 0 0 0 4px rgba(73, 137, 102, 0.1);
+}
+
+.admin-login-card input::placeholder {
+  color: #a0aaa2;
+}
+
+.admin-login-card button {
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 9px;
+  background: #26372e;
+  color: #fff;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.admin-login-card button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: #355443;
+}
+
+.admin-login-card button:disabled {
+  opacity: 0.62;
+  cursor: wait;
+}
+
+.admin-login-error {
+  margin-top: 10px;
+  color: #b42318;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.admin-login-security {
+  margin-top: 17px;
+  color: #929a91;
+  font-size: 9px;
+  text-align: center;
+}
+
+@media (max-width: 800px) {
+  .admin-login {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 32px 22px;
+  }
+
+  .admin-login-story {
+    min-height: 0;
+  }
+
+  .admin-login-message {
+    padding: 38px 0 24px;
+  }
+
+  .admin-login-message h1 {
+    font-size: clamp(39px, 9vw, 60px);
+  }
+
+  .admin-login-message p,
+  .admin-login-footnote {
+    display: none;
+  }
+
+  .admin-login-card {
+    justify-self: stretch;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 520px) {
+  .admin-shell .app-content {
+    min-height: calc(100vh - 65px);
+  }
+
+  .admin-login {
+    align-content: center;
+    gap: 20px;
+    padding: 25px 18px;
+  }
+
+  .admin-login-message {
+    padding: 19px 0 10px;
+  }
+
+  .admin-login-message h1 {
+    font-size: 40px;
+  }
+
+  .admin-login-card {
+    padding: 25px 20px;
+    border-radius: 16px;
+  }
+
+  .admin-main .dashboard-page-light,
+  .admin-main .add-page-dark,
+  .admin-main .list-page-light,
+  .admin-main .orders-page-dark {
+    padding-top: 21px;
+    padding-right: 12px;
+    padding-bottom: 36px;
+    padding-left: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-login-card button,
+  .admin-login-card input {
+    transition: none;
+  }
+
+  .admin-main .order-page-wrapper-dark {
+    animation: none;
+  }
+
+  .admin-main .order-row-card,
+  .admin-main .list-row-grid {
+    transition: none;
+  }
+}

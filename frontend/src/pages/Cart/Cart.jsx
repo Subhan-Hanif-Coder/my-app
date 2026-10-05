@@ -1,91 +1,114 @@
 import React, { useContext } from "react";
-import "./Cart.css";
+import { Link, useNavigate } from "react-router-dom";
+import { FiArrowRight, FiMinus, FiPlus, FiShield, FiShoppingBag, FiTrash2 } from "react-icons/fi";
 import { StoreContext } from "../../context/StoreContext";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import "./Cart.css";
+
+const formatMoney = (amount) => `$${Number(amount || 0).toFixed(2)}`;
 
 const Cart = () => {
-  const { cartItems, food_list, removeFromCart, getTotalCartAmount, url, token } = useContext(StoreContext);
+  const { cartItems, food_list, addToCart, removeFromCart, getTotalCartAmount, url } =
+    useContext(StoreContext);
   const navigate = useNavigate();
-
-  // Checkout handle karne ka function with stylish toast notification
-  const handleCheckout = () => {
-    if (!token) {
-      toast.error("🔒 Please login or signup to place order!", {
-        position: "top-right",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "colored", // Yeh notification ko mazeed stylish aur prominent banata hai
-      });
-      return;
-    }
-    navigate('/order');
-  };
+  const items = food_list.filter((item) => Number(cartItems[item._id]) > 0);
+  const subtotal = getTotalCartAmount();
+  const deliveryFee = subtotal > 0 ? 2 : 0;
+  const total = subtotal + deliveryFee;
 
   return (
-    <div className="cart">
-      <div className="cart-items">
-        <div className="cart-items-title">
-          <p>Items</p>
-          <p>Title</p>
-          <p>Price</p>
-          <p>Quantity</p>
-          <p>Total</p>
-          <p>Remove</p>
+    <main className="cart">
+      <header className="cart-page-heading">
+        <div>
+          <span className="section-eyebrow">A LITTLE SOMETHING GOOD</span>
+          <h1>Your bag</h1>
+          <p>{items.length ? `${items.length} ${items.length === 1 ? "dish" : "dishes"} selected` : "Your next favourite is just around the corner."}</p>
         </div>
-        <br />
-        <hr />
-        {food_list.map((item, index) => {
-          if (cartItems[item._id] > 0) {
-            return (
-              <div key={index}>
-                <div className="cart-items-title cart-items-item">
-                  <img src={url+"/images/"+item.image} alt="" className="cart-items" />
-                  <p>{item.name}</p>
-                  <p>{item.price}</p>
-                  <p>{cartItems[item._id]}</p>
-                  <p>{item.price * cartItems[item._id]}</p>
-                  <p className="cross" onClick={() => removeFromCart(item._id)}>x</p>
-                </div>
-                <hr />
-              </div>
-            );
-          }
-        })}
-      </div>
-      <div className="cart-bottom">
-        <div className="cart-total">
-          <h2>Cart Totals</h2>
-          <div>
-            <div className="cart-total-details">
-              <p>Sub Total</p>
-              <p>{getTotalCartAmount()}</p>
+        <Link className="cart-continue-link" to="/#food-display">
+          Keep exploring <FiArrowRight />
+        </Link>
+      </header>
+
+      {items.length ? (
+        <div className="cart-content-grid">
+          <section className="cart-items" aria-label="Items in your cart">
+            <div className="cart-items-title" aria-hidden="true">
+              <span>Dish</span>
+              <span>Price</span>
+              <span>Quantity</span>
+              <span>Total</span>
+              <span />
             </div>
-            <hr />
-            <div className="cart-total-details">
-              <p>Delivery Fee</p>
-              <p>{getTotalCartAmount()===0?0:2}</p>
+            <div className="cart-items-list">
+              {items.map((item) => {
+                const quantity = Number(cartItems[item._id]);
+                return (
+                  <article className="cart-items-item" key={item._id}>
+                    <div className="cart-item-product">
+                      <img src={`${url}/images/${item.image}`} alt={item.name} />
+                      <div>
+                        <h2>{item.name}</h2>
+                        <span>Fresh from our kitchen</span>
+                      </div>
+                    </div>
+                    <span className="cart-item-price">{formatMoney(item.price)}</span>
+                    <div className="cart-item-quantity" aria-label={`Quantity of ${item.name}`}>
+                      <button type="button" onClick={() => removeFromCart(item._id)} aria-label={`Remove one ${item.name}`}>
+                        <FiMinus />
+                      </button>
+                      <span>{quantity}</span>
+                      <button type="button" onClick={() => addToCart(item._id)} aria-label={`Add one ${item.name}`}>
+                        <FiPlus />
+                      </button>
+                    </div>
+                    <b className="cart-item-total">{formatMoney(item.price * quantity)}</b>
+                    <button
+                      className="cart-item-remove"
+                      type="button"
+                      onClick={async () => {
+                        for (let count = 0; count < quantity; count += 1) {
+                          await removeFromCart(item._id);
+                        }
+                      }}
+                      aria-label={`Remove ${item.name} from cart`}
+                    >
+                      <FiTrash2 />
+                    </button>
+                  </article>
+                );
+              })}
             </div>
-            <hr />
-            <div className="cart-total-details">
-              <b>Total</b>
-              <b>{getTotalCartAmount()===0?0:getTotalCartAmount()+2}</b>
+            <div className="cart-items-note">
+              <FiShoppingBag />
+              <span>Your dishes are prepared fresh after you place your order.</span>
             </div>
-          </div>
-          <button onClick={handleCheckout}>PROCEED TO CHECKOUT</button>
+          </section>
+
+          <aside className="cart-summary">
+            <span className="section-eyebrow">ORDER SUMMARY</span>
+            <h2>Almost yours</h2>
+            <div className="cart-summary-lines">
+              <div><span>Subtotal</span><b>{formatMoney(subtotal)}</b></div>
+              <div><span>Delivery</span><b>{formatMoney(deliveryFee)}</b></div>
+              <div className="cart-summary-total"><span>Total</span><b>{formatMoney(total)}</b></div>
+            </div>
+            <button type="button" onClick={() => navigate("/order")} disabled={!total}>
+              Continue to checkout <FiArrowRight />
+            </button>
+            <div className="cart-secure-note">
+              <FiShield />
+              <span><b>Secure checkout</b><small>Payment is processed safely by Stripe.</small></span>
+            </div>
+          </aside>
         </div>
-        <div className="cart-promoc">
-          <strong><p>If you have a promo code ,Enter it here</p></strong>
-          <div className="cart-promocode-input">
-            <input type="text" placeholder="promocode" />
-            <button>Submit</button>
-          </div>
-        </div>
-      </div>
-    </div>
+      ) : (
+        <section className="cart-empty-state">
+          <span className="cart-empty-icon"><FiShoppingBag /></span>
+          <h2>Your bag is taking a little break</h2>
+          <p>Explore the menu and add something delicious to get started.</p>
+          <Link to="/#food-display">Explore the menu <FiArrowRight /></Link>
+        </section>
+      )}
+    </main>
   );
 };
 

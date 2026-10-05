@@ -1,82 +1,103 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { assets } from "../../assets/assets";
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { StoreContext } from "../../context/StoreContext";
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
   const navigate = useNavigate();
+
+  const closeMobileMenu = (selectedMenu) => {
+    setMenu(selectedMenu);
+    setMobileMenuOpen(false);
+  };
 
   const logout = () => {
     localStorage.removeItem("token");
     setToken("");
+    setMobileMenuOpen(false);
     navigate("/");
   };
 
   return (
     <div className="navbar">
-      <Link to="/">
+      <Link to="/" aria-label="Tomato home" onClick={() => closeMobileMenu("home")}>
         <img src={assets.logo} alt="" className="logo" />
       </Link>
-      <ul className="navbar-menu">
+      <nav className={`navbar-menu ${mobileMenuOpen ? "is-open" : ""}`} aria-label="Main navigation">
         <Link
           to="/"
           className={menu === "home" ? "active" : ""}
-          onClick={() => setMenu("home")}
+          onClick={() => closeMobileMenu("home")}
         >
-          home
+          Home
         </Link>
-        <a
-          href="#explore-menu"
+        <Link
+          to="/#explore-menu"
           className={menu === "menu" ? "active" : ""}
-          onClick={() => setMenu("menu")}
+          onClick={() => closeMobileMenu("menu")}
         >
-          menu
-        </a>
-        <a
-          href="#app-download"
+          Menu
+        </Link>
+        <Link
+          to="/#app-download"
           className={menu === "mobile-app" ? "active" : ""}
-          onClick={() => setMenu("mobile-app")}
+          onClick={() => closeMobileMenu("mobile-app")}
         >
-          mobile-app
-        </a>
-        <a
-          href="#footer"
+          Our app
+        </Link>
+        <Link
+          to="/#footer"
           className={menu === "contact-us" ? "active" : ""}
-          onClick={() => setMenu("contact-us")}
+          onClick={() => closeMobileMenu("contact-us")}
         >
-          contact-us
-        </a>
-      </ul>
+          Contact
+        </Link>
+      </nav>
       <div className="navbar-right">
-        <img src={assets.search_icon} alt="" />
+        <Link className="navbar-icon-link" to="/#food-display" aria-label="Search the menu">
+          <img src={assets.search_icon} alt="" />
+        </Link>
         <div className="navbar-search-icon">
           <Link to="/cart">
-            <img src={assets.basket_icon} alt="" />
+            <img src={assets.basket_icon} alt="Shopping cart" />
           </Link>
           <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
         </div>
         {!token ? (
-          <button onClick={() => setShowLogin(true)}>Sign in</button>
+          <button className="navbar-sign-in" onClick={() => setShowLogin(true)}>Sign in</button>
         ) : (
           <div className="navbar-profile">
-            <img src={assets.profile_icon} alt="" />
-            <ul className="navbar-profile-dropdown">
-              <li onClick={() => navigate('/myorders')}>
+            <button className="navbar-profile-trigger" type="button" aria-label="Open account menu">
+              <img src={assets.profile_icon} alt="" />
+            </button>
+            <div className="navbar-profile-dropdown">
+              <button type="button" onClick={() => navigate("/myorders")}>
                 <img src={assets.bag_icon} alt="" />
-                <p>Orders</p>
-              </li>
+                <span>My orders</span>
+              </button>
               <hr />
-              <li onClick={logout}>
+              <button type="button" onClick={logout}>
                 <img src={assets.logout_icon} alt="" />
-                <p>Logout</p>
-              </li>
-            </ul>
+                <span>Sign out</span>
+              </button>
+            </div>
           </div>
         )}
+        <button
+          className={`navbar-menu-toggle ${mobileMenuOpen ? "is-open" : ""}`}
+          type="button"
+          aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={mobileMenuOpen}
+          onClick={() => setMobileMenuOpen((open) => !open)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
       </div>
     </div>
   );

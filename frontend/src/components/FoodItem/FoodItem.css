@@ -1,76 +1,160 @@
 .food-item {
   width: 100%;
-  margin: auto;
+  overflow: hidden;
+  border: 1px solid #eee9e1;
   border-radius: 15px;
-  box-shadow: 0px 0px 10px #00000015;
-  transition: 0.3s;
-  animation: fadeIn 1s;
+  background: #ffffff;
+  box-shadow: 0 5px 18px rgba(42, 46, 34, 0.055);
+  animation: fadeIn 500ms ease;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.food-item:hover {
+  transform: translateY(-4px);
+  border-color: #e7d9c9;
+  box-shadow: 0 14px 30px rgba(42, 46, 34, 0.11);
 }
 
 .food-item-img-container {
   position: relative;
+  overflow: hidden;
+  background: #f5f2ec;
 }
 
 .food-item-img-container .add {
   position: absolute;
-  width: 35px;
-  bottom: 15px;
-  right: 15px;
-  cursor: pointer;
+  right: 12px;
+  bottom: 12px;
+  width: 39px;
+  height: 39px;
+  padding: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 5px 14px rgba(32, 35, 28, 0.16);
+  cursor: pointer;
+  transition: transform 160ms ease;
+}
+
+.food-item-img-container .add:hover {
+  transform: scale(1.08);
 }
 
 .food-item-counter {
   position: absolute;
-  bottom: 15px;
-  right: 15px;
-  gap: 10px;
-  align-items: center;
+  right: 10px;
+  bottom: 10px;
   display: flex;
-  padding: 6px;
-  border-radius: 50px;
-  background-color: white;
+  align-items: center;
+  gap: 9px;
+  padding: 5px 8px;
+  border: 1px solid rgba(34, 43, 34, 0.08);
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 5px 14px rgba(32, 35, 28, 0.15);
 }
 
-/* Yeh line add karni hai taake counter ke andruni icons mobile par miss na hon */
 .food-item-counter img {
-  width: 30px;
+  width: 27px;
   cursor: pointer;
+  transition: transform 150ms ease;
+}
+
+.food-item-counter img:hover {
+  transform: scale(1.1);
+}
+
+.food-item-counter p {
+  min-width: 14px;
+  color: #28322b;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
 }
 
 .food-item-image {
+  display: block;
   width: 100%;
-  border-radius: 15px 15px 0px 0px;
+  aspect-ratio: 1.35;
+  border-radius: 0;
+  object-fit: cover;
+  transition: transform 250ms ease;
+}
+
+.food-item:hover .food-item-image {
+  transform: scale(1.025);
 }
 
 .food-item-info {
-  padding: 20px;
+  padding: 15px 16px 16px;
 }
 
 .food-item-name-rating {
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+  gap: 8px;
+  margin-bottom: 8px;
 }
 
 .food-item-name-rating p {
-  font-size: 20px;
-  font-weight: 500;
+  color: #29312b;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
 }
 
 .food-item-name-rating img {
-  width: 70px;
+  width: 65px;
+  flex: 0 0 auto;
+  object-fit: contain;
 }
 
 .food-item-desc {
-  color: #676767;
-  font-size: 12px;
+  display: -webkit-box;
+  min-height: 34px;
+  overflow: hidden;
+  color: #858a80;
+  font-size: 11px;
+  line-height: 1.55;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .food-item-price {
-  color: tomato;
-  font-size: 22px;
-  font-weight: 500;
-  margin: 10px 0px;
+  margin: 11px 0 0;
+  color: var(--color-brand);
+  font-size: 19px;
+  font-weight: 700;
+}
+
+@media (max-width: 520px) {
+  .food-item {
+    border-radius: 12px;
+  }
+
+  .food-item-info {
+    padding: 11px;
+  }
+
+  .food-item-name-rating {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .food-item-name-rating p {
+    font-size: 13px;
+  }
+
+  .food-item-name-rating img {
+    width: 57px;
+  }
+
+  .food-item-desc {
+    font-size: 10px;
+  }
+
+  .food-item-price {
+    font-size: 17px;
+  }
 }

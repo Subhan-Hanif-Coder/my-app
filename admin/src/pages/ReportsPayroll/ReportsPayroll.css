@@ -1,0 +1,676 @@
+.business-page {
+  --business-ink: #29372f;
+  --business-muted: #748078;
+  --business-border: #e3e9e4;
+  --business-green: #286b4d;
+  width: min(100%, 1460px);
+  min-width: 0;
+  margin: 0 auto;
+  padding: clamp(22px, 3vw, 40px) clamp(15px, 3vw, 42px) 56px;
+  color: var(--business-ink);
+}
+
+.business-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.business-eyebrow {
+  color: #8d7651;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.business-header h1 {
+  margin-top: 7px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(30px, 3.6vw, 43px);
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+}
+
+.business-header p {
+  margin-top: 8px;
+  color: var(--business-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.business-refresh {
+  display: inline-flex;
+  min-height: 39px;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+  padding: 0 13px;
+  border: 1px solid #d5e3da;
+  border-radius: 9px;
+  background: #f3f8f4;
+  color: var(--business-green);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.business-refresh:hover {
+  border-color: #98bba6;
+  background: #eaf4ed;
+}
+
+.business-report-panel,
+.business-payroll-section {
+  margin-top: 19px;
+  padding: clamp(16px, 2.4vw, 25px);
+  border: 1px solid var(--business-border);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 7px 24px rgba(35, 51, 41, 0.045);
+}
+
+.business-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.business-section-icon {
+  display: grid;
+  width: 39px;
+  height: 39px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid #dce9df;
+  border-radius: 11px;
+  background: #eff6f0;
+  color: #398260;
+  font-size: 17px;
+}
+
+.business-section-icon.payroll {
+  border-color: #e9dfcf;
+  background: #fbf5e9;
+  color: #9a6a2f;
+}
+
+.business-section-heading h2 {
+  color: #2c3b32;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+
+.business-section-heading p {
+  margin-top: 4px;
+  color: #7a857c;
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.business-report-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 11px;
+  margin-top: 19px;
+}
+
+.business-period-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid #e4eae5;
+  border-radius: 10px;
+  background: #f7f9f7;
+}
+
+.business-period-switch button {
+  min-height: 31px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: #6f7c72;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.business-period-switch button.active {
+  background: #fff;
+  color: #286b4d;
+  box-shadow: 0 2px 7px rgba(35, 51, 41, 0.09);
+}
+
+.business-date-control {
+  display: flex;
+  min-height: 38px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+  border: 1px solid #e2e9e4;
+  border-radius: 9px;
+  background: #fbfcfb;
+  color: #78877d;
+}
+
+.business-date-control input {
+  min-width: 125px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #43574a;
+  font: inherit;
+  font-size: 10px;
+}
+
+.business-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+.business-range-label {
+  margin: 16px 0 10px;
+  color: #44594d;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.business-range-label span {
+  color: #929b93;
+  font-weight: 450;
+}
+
+.business-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 11px;
+}
+
+.business-kpi-card {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: 35px minmax(0, 1fr);
+  align-content: start;
+  align-items: center;
+  gap: 5px 10px;
+  padding: 15px;
+  border: 1px solid #e7ece8;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #fff, #fbfcfb);
+}
+
+.business-kpi-icon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  grid-row: span 2;
+  place-items: center;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.business-kpi-icon.sales { background: #edf6ef; color: #43805c; }
+.business-kpi-icon.orders { background: #edf3fb; color: #527ab0; }
+.business-kpi-icon.delivered { background: #eef6f2; color: #28795a; }
+.business-kpi-icon.average { background: #f8f1e6; color: #a17336; }
+
+.business-kpi-card small {
+  overflow: hidden;
+  color: #78837a;
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.business-kpi-card > b {
+  color: #2f4036;
+  font-size: clamp(16px, 2vw, 22px);
+  letter-spacing: -0.04em;
+}
+
+.business-kpi-compare {
+  grid-column: 1 / -1;
+  margin-top: 5px;
+  color: #8a948b;
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+.business-report-detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 12px;
+  margin-top: 13px;
+}
+
+.business-detail-card,
+.business-payroll-records {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #e7ece8;
+  border-radius: 12px;
+  background: #fcfdfc;
+}
+
+.business-detail-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.business-detail-title h3 {
+  color: #34453a;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.business-detail-title > span {
+  color: #909a91;
+  font-size: 9px;
+}
+
+.business-comparison-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid #edf0ed;
+  color: #78847b;
+  font-size: 10px;
+}
+
+.business-comparison-row b { color: #3b4d41; }
+
+.business-change {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 11px;
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.business-change.positive { color: #27815b; }
+.business-change.negative { color: #b75447; }
+
+.business-top-items {
+  display: grid;
+  gap: 2px;
+}
+
+.business-top-item {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 0;
+  border-bottom: 1px solid #edf0ed;
+  font-size: 10px;
+}
+
+.business-top-item:last-child { border-bottom: 0; }
+.business-top-rank { color: #95a098; font-size: 9px; font-weight: 800; }
+.business-top-item b { overflow: hidden; color: #3c4c41; text-overflow: ellipsis; white-space: nowrap; }
+.business-top-item > span:nth-last-child(2) { color: #879188; }
+.business-top-item strong { color: #397453; }
+
+.business-feedback,
+.business-empty-note {
+  padding: 15px 0 4px;
+  color: #78847b;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.business-feedback-error { color: #a3483d; }
+.business-feedback-error button { margin-top: 8px; }
+
+.business-payroll-period {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 18px 0 12px;
+  color: #68766d;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.business-payroll-period input {
+  min-height: 35px;
+  padding: 0 9px;
+  border: 1px solid #e0e8e2;
+  border-radius: 8px;
+  background: #fbfcfb;
+  color: #3e5548;
+  font: inherit;
+}
+
+.business-payroll-overview {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.business-payroll-overview article {
+  display: grid;
+  gap: 7px;
+  padding: 12px 14px;
+  border: 1px solid #e6ebe7;
+  border-radius: 10px;
+  background: #fbfcfb;
+}
+
+.business-payroll-overview small { color: #7b867d; font-size: 9px; }
+.business-payroll-overview b { color: #354a3d; font-size: 17px; }
+
+.business-payroll-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.business-form-card {
+  display: grid;
+  min-width: 0;
+  gap: 12px;
+  padding: 17px;
+  border: 1px solid #e5ebe6;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.business-form-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 2px;
+}
+
+.business-form-title > span {
+  display: grid;
+  width: 31px;
+  height: 31px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 9px;
+  background: #eff6f0;
+  color: #398260;
+}
+
+.business-form-title h3 { color: #35483b; font-size: 12px; font-weight: 750; }
+.business-form-title p { margin-top: 3px; color: #89938a; font-size: 9px; line-height: 1.5; }
+
+.business-form-card > label,
+.business-money-fields label {
+  display: grid;
+  gap: 6px;
+  color: #66746a;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.business-form-card input,
+.business-form-card select,
+.business-money-fields input {
+  width: 100%;
+  min-width: 0;
+  min-height: 37px;
+  padding: 0 10px;
+  border: 1px solid #e0e7e2;
+  border-radius: 8px;
+  outline: none;
+  background: #fcfdfc;
+  color: #394a3f;
+  font: inherit;
+  font-size: 10px;
+}
+
+.business-form-card input:focus,
+.business-form-card select:focus,
+.business-money-fields input:focus,
+.business-payroll-period input:focus {
+  border-color: #8db59c;
+  box-shadow: 0 0 0 3px rgba(40, 107, 77, 0.09);
+}
+
+.business-salary-base,
+.business-net-preview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 11px;
+  border: 1px solid #e6ece7;
+  border-radius: 8px;
+  background: #f8faf8;
+  color: #758078;
+  font-size: 9px;
+}
+
+.business-salary-base b { color: #3b5948; font-size: 12px; }
+
+.business-money-fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.business-money-fields input { min-height: 34px; }
+
+.business-net-preview {
+  border-color: #dbe9df;
+  background: #f1f7f2;
+}
+
+.business-net-preview b { color: #286b4d; font-size: 17px; }
+.business-net-preview.invalid { border-color: #edd3ce; background: #fff6f4; }
+.business-net-preview.invalid b { color: #ad493e; }
+
+.business-primary-button {
+  min-height: 39px;
+  padding: 0 13px;
+  border: 1px solid #286b4d;
+  border-radius: 8px;
+  background: #286b4d;
+  color: #fff;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.business-primary-button:hover:not(:disabled) { background: #20593f; }
+.business-primary-button:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.business-payroll-records { margin-top: 12px; }
+
+.business-staff-directory {
+  margin-top: 12px;
+  padding: 16px;
+  border: 1px solid #e7ece8;
+  border-radius: 12px;
+  background: #fcfdfc;
+}
+
+.business-staff-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.business-staff-card {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 9px;
+  padding: 10px;
+  border: 1px solid #e9eeea;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.business-staff-avatar {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  background: #eef5ef;
+  color: #397453;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.business-staff-copy {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+}
+
+.business-staff-copy b {
+  overflow: hidden;
+  color: #3a4b40;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.business-staff-copy small {
+  overflow: hidden;
+  color: #879188;
+  font-size: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.business-staff-salary {
+  display: grid;
+  flex: 0 0 auto;
+  gap: 3px;
+  margin-left: auto;
+  color: #3a704e;
+  font-size: 10px;
+  font-weight: 750;
+  text-align: right;
+}
+
+.business-staff-salary small {
+  color: #909990;
+  font-size: 8px;
+  font-weight: 500;
+}
+
+.business-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.business-table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.business-table-wrap th {
+  padding: 9px 10px;
+  border-bottom: 1px solid #e7ece8;
+  color: #859087;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.business-table-wrap td {
+  padding: 10px;
+  border-bottom: 1px solid #edf0ed;
+  color: #536258;
+  font-size: 10px;
+}
+
+.business-table-wrap td:first-child { min-width: 145px; }
+.business-table-wrap td:first-child b,
+.business-table-wrap td:first-child small { display: block; }
+.business-table-wrap td:first-child b { color: #3a4c40; }
+.business-table-wrap td:first-child small { margin-top: 3px; color: #8a948c; font-size: 8px; }
+.business-table-wrap td > b { color: #2f6848; }
+
+.business-payment-button {
+  min-height: 29px;
+  padding: 0 9px;
+  border: 1px solid #e2e8e3;
+  border-radius: 7px;
+  background: #f8faf8;
+  color: #637269;
+  font: inherit;
+  font-size: 9px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.business-payment-button:hover { border-color: #91b7a0; color: #286b4d; }
+.business-payment-button.paid { border-color: #d1e7d8; background: #edf7ef; color: #2a7650; }
+
+@media (max-width: 1000px) {
+  .business-kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .business-payroll-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 720px) {
+  .business-report-detail-grid,
+  .business-payroll-grid { grid-template-columns: 1fr; }
+  .business-header { align-items: flex-start; flex-direction: column; }
+  .business-refresh { align-self: flex-start; }
+}
+
+@media (max-width: 480px) {
+  .business-page { padding: 18px 11px 34px; }
+  .business-report-panel,
+  .business-payroll-section { padding: 14px 11px; }
+  .business-section-heading h2 { font-size: 18px; }
+  .business-section-heading p { font-size: 9px; }
+  .business-report-controls { align-items: stretch; flex-direction: column; }
+  .business-period-switch { justify-content: space-between; }
+  .business-period-switch button { flex: 1; padding: 0 7px; }
+  .business-date-control { align-self: flex-start; }
+  .business-kpi-grid { gap: 7px; }
+  .business-kpi-card { gap: 4px 7px; padding: 10px; }
+  .business-kpi-icon { width: 29px; height: 29px; font-size: 13px; }
+  .business-kpi-card > b { font-size: 16px; }
+  .business-kpi-compare { font-size: 8px; }
+  .business-top-item { grid-template-columns: 19px minmax(0, 1fr) auto; }
+  .business-top-item strong { grid-column: 2 / -1; }
+  .business-staff-list { grid-template-columns: 1fr; }
+  .business-money-fields { gap: 5px; }
+  .business-money-fields label { font-size: 8px; }
+  .business-payroll-overview article { padding: 10px; }
+  .business-payroll-overview b { font-size: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .business-page *,
+  .business-page *::before,
+  .business-page *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

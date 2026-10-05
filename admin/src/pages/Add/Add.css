@@ -1,35 +1,320 @@
-.add {
-  width: 70%;
-  margin-left: max(5vw, 25px);
-  margin-top: 50px;
-  color: #6d6d6d;
-  font-size: 16px;
+/* =========================================
+   ADD PAGE - LIGHT SAAS THEME
+========================================= */
+
+.add-page-dark {
+  --surface: #ffffff;
+  --border: #e2e8f0;
+  --text: #0f172a;
+  --muted: #64748b;
+  --accent: #0f766e;
+
+  flex: 1;
+  width: min(100%, 1500px);
+  min-width: 0;
+  margin: 0 auto;
+  padding: 32px clamp(18px, 3vw, 44px) 48px;
+
+  color: var(--text);
+  font-family: "Outfit", sans-serif;
 }
-.add form {
-  gap: 20px;
+
+.add-page-dark *,
+.add-page-dark *::before,
+.add-page-dark *::after {
+  box-sizing: border-box;
 }
-.add-img-upload img {
-  width: 120px;
-  cursor: pointer;
-}
-.add-product-name, .add-product-description {
-  width: max(40%, 280px);
-}
-.add-product-name input, .add-product-description textarea {
-  padding: 10px;
-}
-.add-category-price {
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.add-page-dark .saas-header-dark {
   display: flex;
-  gap: 30px;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid var(--border);
 }
-.add-category-price select, .add-category-price input {
-  padding: 10px;
+
+.add-page-dark .saas-title-group h3 {
+  margin: 0;
+
+  color: var(--text);
+
+  font-size: clamp(21px, 2.2vw, 28px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
 }
-.add-btn {
-  max-width: 120px;
-  border: none;
-  padding: 10px;
-  background-color: black;
-  color: white;
+
+.add-page-dark .saas-title-group h3 span {
+  color: #0f766e;
+}
+
+.add-page-dark .saas-title-group p {
+  margin: 7px 0 0;
+
+  color: var(--muted);
+
+  font-size: 12px;
+}
+
+
+/* =========================================
+   FORM CONTAINER
+========================================= */
+
+.add-page-dark .orders-list-dark {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.add-page-dark .saas-form-box {
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+
+  padding: clamp(18px, 3vw, 30px);
+
+  border: 1px solid var(--border);
+  border-radius: 15px;
+
+  background:
+    radial-gradient(
+      ellipse at 100% 0,
+      rgba(15, 118, 110, 0.045),
+      transparent 42%
+    ),
+    #ffffff;
+
+  box-shadow: 0 15px 40px rgba(15, 23, 42, 0.08);
+}
+
+
+/* =========================================
+   IMAGE UPLOAD
+========================================= */
+
+.add-page-dark .add-img-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.add-page-dark .form-label-dark {
+  margin-bottom: 8px;
+
+  color: #475569;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.add-page-dark .image-upload-wrapper-dark {
+  display: flex;
+
+  width: 100%;
+  max-width: 210px;
+  height: 150px;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 13px;
+  overflow: hidden;
+
+  border: 1px dashed #cbd5e1;
+  border-radius: 11px;
+
+  background: #f8fafc;
+
   cursor: pointer;
+
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.add-page-dark .image-upload-wrapper-dark:hover {
+  border-color: var(--accent);
+  background: #f0f8f5;
+
+  box-shadow: 0 4px 15px rgba(15, 118, 110, 0.08);
+}
+
+.add-page-dark .image-upload-wrapper-dark:focus-within {
+  outline: 2px solid rgba(15, 118, 110, 0.25);
+  outline-offset: 2px;
+}
+
+.add-page-dark .upload-placeholder-img {
+  width: 44px;
+  max-height: 50px;
+
+  object-fit: contain;
+  opacity: 0.65;
+}
+
+.add-page-dark .preview-img-active {
+  width: 100%;
+  height: 100%;
+
+  border-radius: 7px;
+
+  object-fit: cover;
+}
+
+.add-page-dark .upload-text-hint {
+  margin-top: 9px;
+
+  color: #64748b;
+
+  font-size: 10px;
+  text-align: center;
+}
+
+
+/* =========================================
+   INPUTS / TEXTAREA / SELECT
+========================================= */
+
+.add-page-dark .saas-input-dark,
+.add-page-dark .saas-textarea-dark,
+.add-page-dark .saas-select-dark {
+  width: 100%;
+  min-height: 42px;
+
+  padding: 10px 12px;
+
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+
+  outline: none;
+
+  background: #ffffff;
+  color: var(--text);
+
+  font: inherit;
+  font-size: 12px;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.add-page-dark .saas-input-dark:hover,
+.add-page-dark .saas-textarea-dark:hover,
+.add-page-dark .saas-select-dark:hover {
+  border-color: #94a3b8;
+}
+
+.add-page-dark .saas-textarea-dark {
+  min-height: 122px;
+
+  resize: vertical;
+
+  line-height: 1.55;
+}
+
+.add-page-dark .saas-input-dark::placeholder,
+.add-page-dark .saas-textarea-dark::placeholder {
+  color: #94a3b8;
+}
+
+.add-page-dark .saas-input-dark:focus,
+.add-page-dark .saas-textarea-dark:focus,
+.add-page-dark .saas-select-dark:focus {
+  border-color: var(--accent);
+
+  box-shadow:
+    0 0 0 3px rgba(15, 118, 110, 0.1);
+}
+
+.add-page-dark .saas-select-dark option {
+  background: #ffffff;
+  color: var(--text);
+}
+
+
+/* =========================================
+   CATEGORY + PRICE
+========================================= */
+
+.add-page-dark .add-category-price {
+  gap: 14px !important;
+}
+
+
+/* =========================================
+   SUBMIT BUTTON
+========================================= */
+
+.add-page-dark .saas-submit-btn {
+  min-height: 46px;
+
+  margin-top: 2px;
+  padding: 0 18px;
+
+  border: 1px solid rgba(15, 118, 110, 0.3);
+  border-radius: 9px;
+
+  background: linear-gradient(
+    135deg,
+    #2c9b88,
+    #0f766e
+  );
+
+  color: #ffffff;
+
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    filter 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.add-page-dark .saas-submit-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+
+  filter: brightness(1.05);
+
+  box-shadow:
+    0 7px 18px rgba(15, 118, 110, 0.22);
+}
+
+.add-page-dark .saas-submit-btn:focus-visible {
+  outline: 2px solid #0f766e;
+  outline-offset: 3px;
+}
+
+.add-page-dark .saas-submit-btn:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 620px) {
+  .add-page-dark {
+    padding: 22px 14px 32px;
+  }
+
+  .add-page-dark .add-category-price {
+    flex-direction: column;
+  }
 }

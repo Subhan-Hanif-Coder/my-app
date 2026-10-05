@@ -1,0 +1,38 @@
+.storefront-back-navigation {
+  padding: 14px 0 0;
+}
+
+.storefront-back-navigation button {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  border: 1px solid #ebe7df;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #5d665d;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(42, 46, 34, 0.06);
+  transition: border-color 150ms ease, background 150ms ease, color 150ms ease, transform 150ms ease;
+}
+
+.storefront-back-navigation button:hover {
+  transform: translateX(-2px);
+  border-color: #d8c6aa;
+  background: #fffdf8;
+  color: #cf4b32;
+}
+
+.storefront-back-navigation button:focus-visible {
+  outline: 3px solid rgba(207, 75, 50, 0.38);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .storefront-back-navigation button {
+    transition: none;
+  }
+}

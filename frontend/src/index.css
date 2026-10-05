@@ -1,24 +1,104 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-*{
-padding: 0;
-margin: 0;
-box-sizing: border-box;
-font-family: 'Open+Sans', sans-serif;
-scroll-behavior: smooth;
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap');
+
+:root {
+  font-family: 'DM Sans', sans-serif;
+  color: #252923;
+  background: #fffdf9;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --color-ink: #252923;
+  --color-muted: #70766e;
+  --color-brand: #cf4b32;
+  --color-brand-dark: #ad3925;
+  --color-olive: #68774b;
+  --color-cream: #fffdf9;
+  --color-surface: #ffffff;
+  --color-border: #ebe7df;
+  --shadow-soft: 0 12px 35px rgba(42, 46, 34, 0.08);
 }
-body{
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
+body {
+  min-width: 320px;
   min-height: 100vh;
-  
+  background:
+    radial-gradient(ellipse at 50% -24rem, rgba(231, 213, 181, 0.19), transparent 42rem),
+    var(--color-cream);
+  color: var(--color-ink);
 }
-a{
-  text-decoration: none;
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(207, 75, 50, 0.38);
+  outline-offset: 3px;
+}
+
+a {
   color: inherit;
+  text-decoration: none;
 }
-.app{
-  width: 80%;
-  margin: auto;
+
+img {
+  max-width: 100%;
 }
+
+.app {
+  width: min(88%, 1280px);
+  min-height: 62vh;
+  margin: 0 auto;
+}
+
+::selection {
+  background: rgba(207, 75, 50, 0.16);
+  color: var(--color-ink);
+}
+
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 750px) {
+  .app {
+    width: min(92%, 1280px);
+  }
 }

@@ -1,62 +1,192 @@
-.header{
-    height:34vw;
-    margin :30px auto;
-    background: url("/header_img.png"),no-repeat;
-    background-size: contain;
-position: relative;
+.header {
+  position: relative;
+  height: clamp(340px, 39vw, 530px);
+  margin: 25px auto 52px;
+  overflow: hidden;
+  border-radius: 20px;
+  background-color: #596347;
+  background-image: linear-gradient(90deg, rgba(18, 28, 20, 0.76) 0%, rgba(24, 33, 24, 0.48) 43%, rgba(24, 33, 24, 0.03) 100%), url("/header_img.png");
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 20px 45px rgba(42, 46, 34, 0.12);
 }
-.header-contents{
-position: absolute;
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-gap: 1.5vh;
-max-width: 50%;
-bottom: 10%;
-left:6vw;
-animation: fadeIn 1s ease-in-out;
+
+.header-contents {
+  position: absolute;
+  bottom: clamp(38px, 7vw, 76px);
+  left: clamp(28px, 6vw, 78px);
+  display: flex;
+  max-width: min(52%, 560px);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 17px;
+  animation: fadeIn 700ms ease-out;
 }
-.header-contents h2{
-    font-size: max(4.5vw, 22px);
-    color:white;
-    font-weight: 500;
+
+.header-contents h2 {
+  color: #ffffff;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(38px, 5.1vw, 66px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.06;
+  text-wrap: balance;
 }
-.header-contents p{
-    font-size: max(1.5vw, 14px);
-    color:white;
-   
+
+.header-contents p {
+  max-width: 440px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(13px, 1.2vw, 16px);
+  line-height: 1.7;
 }
-.header-contents button{
-    padding: 10px 20px;
-    border: none;
-   background:white;
-   color:tomato;
-    font-size: 18px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s;
+
+.header-contents button {
+  min-height: 47px;
+  margin-top: 3px;
+  padding: 0 23px;
+  border: 1px solid #ffffff;
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--color-brand);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 160ms ease, background 160ms ease, color 160ms ease;
 }
-.header-contents button:hover{
-    background-color: tomato;
-    color:white;
+
+.header-contents button:hover {
+  transform: translateY(-2px);
+  background: var(--color-brand);
+  color: #ffffff;
 }
-@media (max-width: 1050px) {
-  .header {
-    height: 38vw;
-  }
-  .header-contents {
-    max-width: 45%;
-  }
+
+.header-contents {
+  bottom: clamp(30px, 5vw, 58px);
+  gap: 15px;
+}
+
+.header-eyebrow,
+.header-promise {
+  display: flex;
+  align-items: center;
+}
+
+.header-eyebrow {
+  gap: 9px;
+  color: #f6dfb6;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+}
+
+.header-eyebrow > span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #e9a24b;
+  box-shadow: 0 0 0 4px rgba(233, 162, 75, 0.2);
+}
+
+.header-contents h2 {
+  font-size: clamp(48px, 6vw, 76px);
+}
+
+.header-cta {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  gap: 18px;
+  margin-top: 3px;
+  padding: 0 20px;
+  border-radius: 999px;
+  background: #f4a947;
+  color: #2b2419;
+  font-size: 13px;
+  font-weight: 700;
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.header-cta:hover {
+  transform: translateY(-2px);
+  background: #ffc46b;
+}
+
+.header-cta span {
+  font-size: 17px;
+}
+
+.header-promise {
+  flex-wrap: wrap;
+  gap: 9px 20px;
+  margin-top: 5px;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 11px;
+}
+
+.header-promise b {
+  margin-right: 5px;
+  color: #f6bd67;
 }
 
 @media (max-width: 750px) {
+  .header {
+    height: clamp(300px, 70vw, 410px);
+    margin: 17px auto 38px;
+    border-radius: 15px;
+    background-position: 58% center;
+  }
+
   .header-contents {
-    max-width: 65%;
+    right: 22px;
+    bottom: 28px;
+    left: 22px;
+    max-width: 80%;
+    gap: 12px;
   }
+
+  .header-contents h2 {
+    max-width: 440px;
+    font-size: clamp(34px, 9vw, 48px);
+  }
+
   .header-contents p {
-    display: none;
+    display: block;
+    max-width: 350px;
+    font-size: 12px;
   }
+
   .header-contents button {
-    padding: 2vw 4vw;
+    min-height: 42px;
+    padding: 0 19px;
+    font-size: 12px;
+  }
+
+  .header-contents {
+    gap: 11px;
+  }
+
+  .header-contents h2 {
+    font-size: clamp(42px, 10vw, 56px);
+  }
+
+  .header-cta {
+    min-height: 42px;
+    padding: 0 17px;
+    font-size: 12px;
+  }
+
+  .header-promise {
+    gap: 7px 13px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 420px) {
+  .header-contents {
+    max-width: 95%;
+  }
+
+  .header-contents h2 {
+    font-size: 34px;
   }
 }

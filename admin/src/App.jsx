@@ -1,60 +1,161 @@
-import React, { useState } from 'react'
-import Navbar from './components/Navbar/Navbar';
-import Sidebar from './components/Sidebar/Sidebar';
-import { Routes,Route } from 'react-router-dom';
-import Add from './pages/Add/Add';
-import List from './pages/List/List';
-import Orders from './pages/Orders/Orders';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState } from "react";
+import axios from "axios";
+import Navbar from "./components/Navbar/Navbar";
+import Sidebar from "./components/Sidebar/Sidebar";
+import { Navigate, Routes, Route, useNavigate } from "react-router-dom";
+import Add from "./pages/Add/Add";
+import List from "./pages/List/List";
+import Orders from "./pages/Orders/Orders";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import ReportsPayroll from "./pages/ReportsPayroll/ReportsPayroll";
+import PrintReports from "./pages/PrintReports/PrintReports";
+import Promotions from "./pages/Promotions/Promotions";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
 
 const App = () => {
+  const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passwordInput, setPasswordInput] = useState("");
+  const [adminApiKey, setAdminApiKey] = useState("");
+  const [loginError, setLoginError] = useState("");
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogout = () => {
+    setAdminApiKey("");
+    setPasswordInput("");
+    setIsAuthenticated(false);
+  };
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Yahan aap apna pasandeeda password rakh sakte hain
-    if (passwordInput === "SubhanHaneef123@!..") {
-      setIsAuthenticated(true);
-    } else {
-      alert("Ghalat password!");
+    setIsLoggingIn(true);
+    setLoginError("");
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/order/reservation/admin/login",
+        {},
+        { headers: { "x-admin-key": passwordInput } },
+      );
+      if (response.data?.success) {
+        setAdminApiKey(passwordInput);
+        setIsAuthenticated(true);
+        navigate("/", { replace: true });
+      } else {
+        setLoginError(
+          response.data?.message || "Admin access could not be verified.",
+        );
+      }
+    } catch (error) {
+      setLoginError(
+        error.response?.data?.message ||
+          "Could not connect to the admin service.",
+      );
+    } finally {
+      setIsLoggingIn(false);
     }
   };
 
   if (!isAuthenticated) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#f0f2f5' }}>
-        <form onSubmit={handleLogin} style={{ padding: '30px', background: '#fff', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', textAlign: 'center' }}>
-          <h2>Admin Panel Login</h2>
-          <input 
-            type="password" 
-            placeholder="Password enter karein" 
-            value={passwordInput} 
-            onChange={(e) => setPasswordInput(e.target.value)} 
-            style={{ padding: '10px', margin: '15px 0', width: '200px', display: 'block', border: '1px solid #ccc', borderRadius: '4px' }}
+      <main className="admin-login">
+        <section className="admin-login-story">
+          <div className="admin-login-brand">
+            <span className="admin-brand-mark">T</span>
+            <span>tomato<span className="admin-brand-dot">.</span><small>RESTAURANT OS</small></span>
+          </div>
+          <div className="admin-login-message">
+            <span className="admin-login-kicker">YOUR BUSINESS, AT A GLANCE</span>
+            <h1>Run a restaurant<br />worth coming back to.</h1>
+            <p>One calm workspace for your menu, orders, reservations, and the details that make service exceptional.</p>
+          </div>
+          <div className="admin-login-footnote">
+            <span className="admin-login-live-dot" /> Private workspace <span>·</span> Secure admin access
+          </div>
+        </section>
+        <form className="admin-login-card" onSubmit={handleLogin}>
+          <span className="admin-login-card-mark">WELCOME BACK</span>
+          <h2>Sign in to your workspace</h2>
+          <p>Enter the admin access key configured by your server.</p>
+          <label htmlFor="admin-access-key">Admin access key</label>
+          <input
+            id="admin-access-key"
+            type="password"
+            placeholder="Enter your secure key"
+            value={passwordInput}
+            onChange={(e) => {
+              setPasswordInput(e.target.value);
+              setLoginError("");
+            }}
+            autoComplete="current-password"
+            required
           />
-          <button type="submit" style={{ padding: '10px 20px', background: '#ff4c24', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Login</button>
+          {loginError && (
+            <p className="admin-login-error" role="alert">{loginError}</p>
+          )}
+          <button
+            type="submit"
+            disabled={isLoggingIn || !passwordInput}
+          >
+            {isLoggingIn ? "Verifying access..." : "Enter workspace"} <span aria-hidden="true">↗</span>
+          </button>
+          <small className="admin-login-security">Your access key is verified securely by the backend.</small>
         </form>
-      </div>
+      </main>
     );
   }
 
   return (
-    <div>
+    <div className="admin-shell">
       <ToastContainer />
-      <Navbar/>
-      <hr />
+      <Navbar
+        onLogout={handleLogout}
+        isSidebarOpen={isSidebarOpen}
+        onToggleSidebar={() => setIsSidebarOpen((open) => !open)}
+      />
       <div className="app-content">
-        <Sidebar/>
-        <Routes>
+        <Sidebar
+          isOpen={isSidebarOpen}
+          onClose={() => setIsSidebarOpen(false)}
+          onNavigate={() => setIsSidebarOpen(false)}
+        />
+        <main className="admin-main">
+          <Routes>
+          <Route path="/" element={<Dashboard url="http://localhost:4000" />} />
           <Route path="/add" element={<Add url="http://localhost:4000" />} />
           <Route path="/list" element={<List url="http://localhost:4000" />} />
-          <Route path="/orders" element={<Orders url="http://localhost:4000" />} />
-        </Routes>
+          <Route
+            path="/reports-payroll"
+            element={<ReportsPayroll url="http://localhost:4000" adminKey={adminApiKey} />}
+          />
+          <Route
+            path="/print-reports"
+            element={<PrintReports url="http://localhost:4000" adminKey={adminApiKey} />}
+          />
+          <Route
+            path="/orders"
+            element={
+              <Orders key="active-orders" url="http://localhost:4000" adminKey={adminApiKey} />
+            }
+          />
+          <Route
+            path="/completed-orders"
+            element={
+              <Orders key="completed-orders" url="http://localhost:4000" adminKey={adminApiKey} completedOnly />
+            }
+          />
+          <Route
+            path="/promotions"
+            element={<Promotions url="http://localhost:4000" adminKey={adminApiKey} />}
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </main>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

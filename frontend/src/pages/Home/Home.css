@@ -1,0 +1,1242 @@
+.home-page {
+  padding-bottom: 8px;
+}
+
+.home-page > .scroll-reveal {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translate3d(0, 28px, 0) scale(0.99);
+  transition:
+    opacity 720ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    filter 720ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 720ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: opacity, filter, transform;
+}
+
+.home-page > .scroll-reveal.is-visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translate3d(0, 0, 0) scale(1);
+  will-change: auto;
+}
+
+.scroll-reveal .category-collection-card,
+.scroll-reveal .how-it-works-step,
+.scroll-reveal .home-food-grid > .food-item,
+.scroll-reveal .food-display-list > .food-item,
+.scroll-reveal .explore-menu-list-item {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0) scale(0.985);
+  transition:
+    opacity 620ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 620ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.scroll-reveal.is-visible .category-collection-card,
+.scroll-reveal.is-visible .how-it-works-step,
+.scroll-reveal.is-visible .home-food-grid > .food-item,
+.scroll-reveal.is-visible .food-display-list > .food-item,
+.scroll-reveal.is-visible .explore-menu-list-item {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.scroll-reveal.is-visible .home-food-grid > .food-item:hover,
+.scroll-reveal.is-visible .food-display-list > .food-item:hover {
+  transform: translate3d(0, -4px, 0) scale(1.01);
+}
+
+.scroll-reveal.is-visible .category-collection-card:nth-child(2),
+.scroll-reveal.is-visible .how-it-works-step:nth-child(2),
+.scroll-reveal.is-visible .home-food-grid > .food-item:nth-child(2),
+.scroll-reveal.is-visible .food-display-list > .food-item:nth-child(2),
+.scroll-reveal.is-visible .explore-menu-list-item:nth-child(2) {
+  transition-delay: 80ms;
+}
+
+.scroll-reveal.is-visible .category-collection-card:nth-child(3),
+.scroll-reveal.is-visible .how-it-works-step:nth-child(3),
+.scroll-reveal.is-visible .home-food-grid > .food-item:nth-child(3),
+.scroll-reveal.is-visible .food-display-list > .food-item:nth-child(3),
+.scroll-reveal.is-visible .explore-menu-list-item:nth-child(3) {
+  transition-delay: 150ms;
+}
+
+.scroll-reveal.is-visible .category-collection-card:nth-child(4),
+.scroll-reveal.is-visible .home-food-grid > .food-item:nth-child(4),
+.scroll-reveal.is-visible .food-display-list > .food-item:nth-child(4),
+.scroll-reveal.is-visible .explore-menu-list-item:nth-child(4) {
+  transition-delay: 220ms;
+}
+
+.scroll-reveal.is-visible .category-collection-card:nth-child(5),
+.scroll-reveal.is-visible .home-food-grid > .food-item:nth-child(5),
+.scroll-reveal.is-visible .food-display-list > .food-item:nth-child(5),
+.scroll-reveal.is-visible .explore-menu-list-item:nth-child(5) {
+  transition-delay: 290ms;
+}
+
+.scroll-reveal.is-visible .category-collection-card:nth-child(6),
+.scroll-reveal.is-visible .home-food-grid > .food-item:nth-child(6),
+.scroll-reveal.is-visible .food-display-list > .food-item:nth-child(6),
+.scroll-reveal.is-visible .explore-menu-list-item:nth-child(6) {
+  transition-delay: 360ms;
+}
+
+.scroll-reveal.is-visible .category-collection-card:nth-child(7),
+.scroll-reveal.is-visible .home-food-grid > .food-item:nth-child(7),
+.scroll-reveal.is-visible .food-display-list > .food-item:nth-child(7),
+.scroll-reveal.is-visible .explore-menu-list-item:nth-child(7) {
+  transition-delay: 430ms;
+}
+
+.scroll-reveal.is-visible .category-collection-card:nth-child(8),
+.scroll-reveal.is-visible .home-food-grid > .food-item:nth-child(8),
+.scroll-reveal.is-visible .food-display-list > .food-item:nth-child(8),
+.scroll-reveal.is-visible .explore-menu-list-item:nth-child(8) {
+  transition-delay: 500ms;
+}
+
+.home-section {
+  margin: 52px 0 56px;
+}
+
+.home-section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+.home-section-heading h2 {
+  color: var(--color-ink);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(25px, 3vw, 35px);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.home-section-heading p {
+  margin-top: 7px;
+  color: var(--color-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.home-section-heading > a {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 7px;
+  padding-bottom: 4px;
+  color: var(--color-brand);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.home-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: -1px 0 48px;
+  padding: 21px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.home-highlights article {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 2px 16px;
+}
+
+.home-highlights article + article {
+  border-left: 1px solid var(--color-border);
+}
+
+.home-highlight-icon,
+.latest-order-icon {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 13px;
+  background: #f7eee2;
+  color: var(--color-brand);
+  font-size: 18px;
+}
+
+.home-highlights article > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.home-highlights b {
+  color: var(--color-ink);
+  font-size: 12px;
+}
+
+.home-highlights article > div > span {
+  color: var(--color-muted);
+  font-size: 10px;
+}
+
+.latest-order {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 48px 0;
+  padding: 17px 20px;
+  border: 1px solid #e9e2d5;
+  border-radius: 15px;
+  background: linear-gradient(110deg, #fffaf1, #fffdf9);
+}
+
+.latest-order-icon {
+  width: 44px;
+  height: 44px;
+  background: #f5e6cf;
+  font-size: 19px;
+}
+
+.latest-order-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.latest-order-copy .section-eyebrow {
+  margin-bottom: 3px;
+}
+
+.latest-order-copy h2 {
+  color: var(--color-ink);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+}
+
+.latest-order-copy p {
+  margin-top: 4px;
+  color: var(--color-muted);
+  font-size: 11px;
+}
+
+.latest-order-copy p span {
+  margin: 0 4px;
+  color: #c7b9a3;
+}
+
+.latest-order-copy .latest-order-error {
+  color: #ad3925;
+}
+
+.latest-order-link {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid #ead5b6;
+  border-radius: 999px;
+  background: #fff;
+  color: #8a5922;
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.latest-order-link:hover {
+  transform: translateY(-1px);
+  background: #fff6e8;
+}
+
+.category-collections {
+  margin-top: 42px;
+}
+
+.category-collection-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.category-collection-card {
+  position: relative;
+  min-width: 0;
+  height: clamp(145px, 17vw, 205px);
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  border-radius: 15px;
+  background: #485045;
+  text-align: left;
+  cursor: pointer;
+  isolation: isolate;
+}
+
+.category-collection-card img,
+.category-collection-shade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.category-collection-card img {
+  z-index: -2;
+  object-fit: cover;
+  transition: transform 280ms ease;
+}
+
+.category-collection-shade {
+  z-index: -1;
+  background: linear-gradient(0deg, rgba(24, 31, 24, 0.84), rgba(24, 31, 24, 0.04) 85%);
+}
+
+.category-collection-copy {
+  position: absolute;
+  right: 43px;
+  bottom: 17px;
+  left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: #ffffff;
+}
+
+.category-collection-copy b {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.category-collection-copy small {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 10px;
+}
+
+.category-collection-arrow {
+  position: absolute;
+  right: 13px;
+  bottom: 16px;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+  color: #ffffff;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.category-collection-card:hover img {
+  transform: scale(1.06);
+}
+
+.category-collection-card:hover .category-collection-arrow {
+  background: #ffffff;
+  color: var(--color-brand);
+}
+
+.category-collection-card:focus-visible {
+  outline: 3px solid var(--color-brand);
+  outline-offset: 3px;
+}
+
+.reservation-section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 22px;
+  margin: 56px 0;
+  padding: clamp(20px, 4vw, 44px);
+  border: 1px solid #e9e0d2;
+  border-radius: 22px;
+  background:
+    radial-gradient(ellipse at 0 0, rgba(233, 192, 129, 0.16), transparent 43%),
+    linear-gradient(135deg, #f9f5ec, #fffdf9 65%);
+  box-shadow: 0 18px 45px rgba(55, 45, 30, 0.06);
+}
+
+.reservation-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 9px 15px 9px 2px;
+}
+
+.reservation-intro h2 {
+  max-width: 390px;
+  color: var(--color-ink);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(34px, 4.2vw, 54px);
+  letter-spacing: -0.045em;
+  line-height: 1.04;
+}
+
+.reservation-intro > p {
+  max-width: 400px;
+  margin-top: 16px;
+  color: #73766d;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.reservation-perks {
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.reservation-perks span,
+.reservation-note {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #50594f;
+  font-size: 11px;
+}
+
+.reservation-perks svg {
+  color: var(--color-olive);
+  font-size: 15px;
+}
+
+.reservation-note {
+  max-width: 380px;
+  align-items: flex-start;
+  margin-top: 25px;
+  padding: 12px 13px;
+  border: 1px solid #eadfce;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.62);
+  color: #77776d;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.reservation-note svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  color: #a76c20;
+}
+
+.reservation-panel,
+.reservation-status-panel {
+  min-width: 0;
+  padding: clamp(18px, 2.6vw, 27px);
+  border: 1px solid rgba(229, 222, 210, 0.92);
+  border-radius: 17px;
+  background: #ffffff;
+  box-shadow: 0 9px 26px rgba(42, 46, 34, 0.045);
+}
+
+.reservation-panel-heading {
+  margin-bottom: 18px;
+}
+
+.reservation-panel-heading .section-eyebrow,
+.reservation-status-panel .section-eyebrow {
+  margin-bottom: 5px;
+}
+
+.reservation-panel-heading h3,
+.reservation-status-panel h3 {
+  color: var(--color-ink);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+}
+
+.reservation-form,
+.reservation-form label,
+.reservation-lookup label {
+  display: flex;
+  flex-direction: column;
+}
+
+.reservation-form {
+  gap: 13px;
+}
+
+.reservation-form label,
+.reservation-lookup label {
+  min-width: 0;
+  gap: 6px;
+}
+
+.reservation-form label > span:first-child,
+.reservation-lookup label > span {
+  color: #50594f;
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.reservation-form label > span:first-child small {
+  color: #999d93;
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.reservation-form input,
+.reservation-form select,
+.reservation-form textarea,
+.reservation-lookup input {
+  width: 100%;
+  min-width: 0;
+  min-height: 42px;
+  padding: 10px 11px;
+  border: 1px solid #e5e6df;
+  border-radius: 8px;
+  outline: 0;
+  background: #fdfdfb;
+  color: var(--color-ink);
+  font-family: inherit;
+  font-size: 11px;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.reservation-form textarea {
+  min-height: 78px;
+  resize: vertical;
+}
+
+.reservation-form input:focus,
+.reservation-form select:focus,
+.reservation-form textarea:focus,
+.reservation-lookup input:focus {
+  border-color: #88a894;
+  box-shadow: 0 0 0 3px rgba(104, 119, 75, 0.1);
+}
+
+.reservation-form input::placeholder,
+.reservation-form textarea::placeholder,
+.reservation-lookup input::placeholder {
+  color: #a4a79e;
+}
+
+.reservation-input-icon {
+  position: relative;
+}
+
+.reservation-input-icon > svg {
+  position: absolute;
+  top: 50%;
+  left: 11px;
+  color: #92978d;
+  font-size: 14px;
+  transform: translateY(-50%);
+}
+
+.reservation-input-icon input {
+  padding-left: 34px;
+}
+
+.reservation-form-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(100px, 0.65fr);
+  gap: 10px;
+}
+
+.reservation-submit,
+.reservation-lookup button {
+  display: inline-flex;
+  min-height: 45px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 0;
+  border-radius: 9px;
+  background: #26352d;
+  color: #fff;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.reservation-submit:hover,
+.reservation-lookup button:hover {
+  transform: translateY(-1px);
+  background: var(--color-brand-dark);
+}
+
+.reservation-submit:disabled,
+.reservation-lookup button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+  transform: none;
+}
+
+.reservation-privacy {
+  color: #898e83;
+  font-size: 9px;
+  text-align: center;
+}
+
+.reservation-status-panel {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: 20px;
+  padding: 20px 23px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.reservation-status-panel h3 {
+  font-size: 19px;
+}
+
+.reservation-status-panel > div:first-child > p {
+  max-width: 360px;
+  margin-top: 6px;
+  color: var(--color-muted);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.reservation-lookup {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 9px;
+}
+
+.reservation-lookup input {
+  min-height: 39px;
+}
+
+.reservation-lookup button {
+  min-height: 39px;
+  padding: 0 13px;
+  white-space: nowrap;
+}
+
+.reservation-form-error {
+  color: #ad3925;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.reservation-result {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 13px;
+  border: 1px solid #e3e8dc;
+  border-radius: 9px;
+  background: #f7faf5;
+  color: #526444;
+}
+
+.reservation-result > svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  font-size: 16px;
+}
+
+.reservation-result > div {
+  display: grid;
+  gap: 4px;
+}
+
+.reservation-result b {
+  color: #344631;
+  font-size: 10px;
+}
+
+.reservation-result span {
+  color: #687463;
+  font-size: 10px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.reservation-result strong {
+  color: #283b2d;
+  user-select: all;
+}
+
+.reservation-result-success {
+  border-color: #d8e9dd;
+  background: #f2f8f3;
+}
+
+.how-it-works-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 17px;
+  background: #ffffff;
+  box-shadow: 0 9px 28px rgba(42, 46, 34, 0.045);
+}
+
+.how-it-works-step {
+  position: relative;
+  display: flex;
+  min-height: 210px;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 22px;
+  color: inherit;
+  transition: background 160ms ease;
+}
+
+.how-it-works-step + .how-it-works-step {
+  border-left: 1px solid var(--color-border);
+}
+
+.how-it-works-step:hover {
+  background: #fffaf2;
+}
+
+.how-it-works-number {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  color: #c9c5b9;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 24px;
+}
+
+.how-it-works-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 17px;
+  place-items: center;
+  border-radius: 13px;
+  background: #f8efe2;
+  color: var(--color-brand);
+  font-size: 19px;
+}
+
+.how-it-works-step b {
+  color: var(--color-ink);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 17px;
+}
+
+.how-it-works-step small {
+  max-width: 250px;
+  margin-top: 7px;
+  color: var(--color-muted);
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.how-it-works-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: auto;
+  padding-top: 17px;
+  color: var(--color-brand);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.food-collection {
+  padding: clamp(20px, 3.5vw, 36px);
+  border: 1px solid #ede7dc;
+  border-radius: 20px;
+  background:
+    radial-gradient(ellipse at 96% 0%, rgba(240, 216, 181, 0.25), transparent 40%),
+    #fbfaf6;
+}
+
+.home-food-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.home-food-grid .food-item {
+  box-shadow: 0 5px 16px rgba(42, 46, 34, 0.045);
+}
+
+.home-food-grid .food-item-image {
+  aspect-ratio: 1.38;
+}
+
+.cart-overview {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 48px 0;
+  padding: 21px 24px;
+  border: 1px solid #e8e7df;
+  border-radius: 17px;
+  background: linear-gradient(110deg, #ffffff, #f8f8f2);
+}
+
+.cart-overview-filled {
+  border-color: #e8d9c4;
+  background: linear-gradient(110deg, #fffaf1, #fffdf9);
+}
+
+.cart-overview-icon {
+  display: grid;
+  width: 47px;
+  height: 47px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 14px;
+  background: #f6eee2;
+  color: var(--color-brand);
+  font-size: 20px;
+}
+
+.cart-overview-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.cart-overview-copy .section-eyebrow {
+  margin-bottom: 3px;
+}
+
+.cart-overview-copy h2 {
+  color: var(--color-ink);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+}
+
+.cart-overview-copy p {
+  margin-top: 5px;
+  overflow: hidden;
+  color: var(--color-muted);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cart-overview-total {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 18px;
+  border-left: 1px solid var(--color-border);
+}
+
+.cart-overview-total small {
+  color: var(--color-muted);
+  font-size: 10px;
+}
+
+.cart-overview-total b {
+  color: var(--color-ink);
+  font-size: 16px;
+}
+
+.cart-overview-link {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 15px;
+  border-radius: 999px;
+  background: var(--color-brand);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  transition: background 150ms ease, transform 150ms ease;
+}
+
+.cart-overview-link:hover {
+  transform: translateY(-1px);
+  background: var(--color-brand-dark);
+}
+
+.menu-spotlight {
+  margin: 48px 0 55px;
+  padding: clamp(20px, 3.4vw, 38px);
+  border: 1px solid #ede7dc;
+  border-radius: 20px;
+  background:
+    radial-gradient(ellipse at 95% 0%, rgba(240, 216, 181, 0.26), transparent 42%),
+    #fbfaf6;
+}
+
+.menu-spotlight-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 23px;
+}
+
+.menu-spotlight-header h2 {
+  color: var(--color-ink);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(23px, 3vw, 32px);
+  letter-spacing: -0.025em;
+}
+
+.menu-spotlight-header p {
+  margin-top: 7px;
+  color: var(--color-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.menu-spotlight-header > a {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 7px;
+  padding-bottom: 4px;
+  color: var(--color-brand);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.menu-spotlight-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.menu-spotlight-grid .food-item {
+  box-shadow: 0 5px 16px rgba(42, 46, 34, 0.045);
+}
+
+.menu-spotlight-grid .food-item-image {
+  aspect-ratio: 1.38;
+}
+
+@media (max-width: 800px) {
+  .home-highlights {
+    margin-bottom: 37px;
+  }
+
+  .home-highlights article {
+    justify-content: flex-start;
+    gap: 9px;
+    padding: 2px 10px;
+  }
+
+  .home-highlight-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+
+  .home-highlights article > div > span {
+    font-size: 9px;
+  }
+
+  .category-collection-grid,
+  .home-food-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+  }
+
+  .category-collection-card {
+    height: clamp(145px, 31vw, 205px);
+  }
+
+  .how-it-works-step {
+    padding: 17px 14px;
+  }
+
+  .how-it-works-step small {
+    font-size: 10px;
+  }
+
+  .reservation-section {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 14px;
+    padding: 22px;
+  }
+
+  .reservation-intro {
+    padding-right: 5px;
+  }
+
+  .reservation-status-panel {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .cart-overview {
+    flex-wrap: wrap;
+  }
+
+  .cart-overview-copy {
+    flex-basis: calc(100% - 70px);
+  }
+
+  .cart-overview-total {
+    margin-left: 63px;
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .home-highlights {
+    margin-bottom: 30px;
+    padding: 15px 0;
+  }
+
+  .home-highlights article {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 7px;
+    padding: 0 8px;
+  }
+
+  .home-highlights b {
+    font-size: 10px;
+  }
+
+  .home-highlights article > div > span {
+    max-width: 100px;
+    font-size: 8px;
+    line-height: 1.4;
+  }
+
+  .latest-order {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 11px;
+    margin: 32px 0;
+    padding: 14px;
+  }
+
+  .latest-order-copy {
+    flex-basis: calc(100% - 57px);
+  }
+
+  .latest-order-copy h2 {
+    font-size: 16px;
+  }
+
+  .latest-order-link {
+    margin-left: 55px;
+  }
+
+  .home-section {
+    margin: 37px 0 41px;
+  }
+
+  .home-section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 11px;
+    margin-bottom: 16px;
+  }
+
+  .home-section-heading h2 {
+    font-size: 25px;
+  }
+
+  .home-section-heading p {
+    max-width: 310px;
+    font-size: 11px;
+  }
+
+  .category-collection-grid,
+  .home-food-grid {
+    gap: 10px;
+  }
+
+  .category-collection-card {
+    height: 140px;
+    border-radius: 12px;
+  }
+
+  .category-collection-copy {
+    right: 34px;
+    bottom: 12px;
+    left: 11px;
+  }
+
+  .category-collection-copy b {
+    font-size: 16px;
+  }
+
+  .category-collection-copy small {
+    font-size: 9px;
+  }
+
+  .category-collection-arrow {
+    right: 9px;
+    bottom: 10px;
+    width: 25px;
+    height: 25px;
+  }
+
+  .how-it-works-grid {
+    grid-template-columns: 1fr;
+    border-radius: 14px;
+  }
+
+  .how-it-works-step {
+    min-height: 0;
+    padding: 16px;
+  }
+
+  .how-it-works-step + .how-it-works-step {
+    border-top: 1px solid var(--color-border);
+    border-left: 0;
+  }
+
+  .how-it-works-icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+
+  .how-it-works-action {
+    padding-top: 10px;
+  }
+
+  .reservation-section {
+    grid-template-columns: 1fr;
+    gap: 13px;
+    margin: 39px 0;
+    padding: 16px;
+    border-radius: 17px;
+  }
+
+  .reservation-intro {
+    padding: 8px 3px 13px;
+  }
+
+  .reservation-intro h2 {
+    max-width: 320px;
+    font-size: 38px;
+  }
+
+  .reservation-intro > p {
+    margin-top: 10px;
+    font-size: 11px;
+  }
+
+  .reservation-perks {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .reservation-perks span {
+    font-size: 9px;
+  }
+
+  .reservation-note {
+    margin-top: 15px;
+  }
+
+  .reservation-panel,
+  .reservation-status-panel {
+    padding: 16px;
+    border-radius: 13px;
+  }
+
+  .reservation-panel-heading h3 {
+    font-size: 20px;
+  }
+
+  .reservation-status-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .reservation-lookup {
+    grid-template-columns: 1fr;
+  }
+
+  .food-collection {
+    padding: 17px 13px;
+    border-radius: 15px;
+  }
+
+  .cart-overview {
+    gap: 11px;
+    margin: 32px 0;
+    padding: 15px;
+  }
+
+  .cart-overview-icon {
+    width: 39px;
+    height: 39px;
+    font-size: 17px;
+  }
+
+  .cart-overview-copy {
+    flex-basis: calc(100% - 50px);
+  }
+
+  .cart-overview-copy h2 {
+    font-size: 16px;
+  }
+
+  .cart-overview-copy p {
+    font-size: 10px;
+  }
+
+  .cart-overview-total {
+    margin-left: 50px;
+  }
+
+  .cart-overview-link {
+    padding: 10px 12px;
+    font-size: 10px;
+  }
+
+  .menu-spotlight {
+    margin: 35px 0 40px;
+    padding: 17px 13px;
+    border-radius: 15px;
+  }
+
+  .menu-spotlight-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 11px;
+    margin-bottom: 16px;
+  }
+
+  .menu-spotlight-header h2 {
+    font-size: 24px;
+  }
+
+  .menu-spotlight-header p {
+    max-width: 290px;
+    font-size: 11px;
+  }
+
+  .menu-spotlight-grid {
+    gap: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page > .scroll-reveal,
+  .home-page > .scroll-reveal.is-visible,
+  .scroll-reveal .category-collection-card,
+  .scroll-reveal .how-it-works-step,
+  .scroll-reveal .home-food-grid > .food-item,
+  .scroll-reveal .food-display-list > .food-item,
+  .scroll-reveal .explore-menu-list-item {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+
+  .latest-order-link {
+    transition: none;
+  }
+}

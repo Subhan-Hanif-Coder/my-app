@@ -1,0 +1,172 @@
+.store-promotion-overlay {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgba(28, 35, 29, 0.62);
+  backdrop-filter: blur(5px);
+  animation: store-promotion-fade-in 180ms ease both;
+}
+
+.store-promotion-dialog {
+  position: relative;
+  display: flex;
+  width: min(100%, 470px);
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(28px, 6vw, 48px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 24px;
+  background:
+    radial-gradient(ellipse at 50% 0, rgba(225, 205, 161, 0.27), transparent 52%),
+    #fffdf8;
+  box-shadow: 0 28px 90px rgba(12, 19, 14, 0.25);
+  text-align: center;
+  animation: store-promotion-rise 220ms ease both;
+}
+
+.store-promotion-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid #ebe7df;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #72796f;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.store-promotion-close:hover {
+  background: #f7f3ea;
+  color: #30392f;
+}
+
+.store-promotion-dialog .store-promotion-icon {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  margin-bottom: 18px;
+  place-items: center;
+  border: 1px solid #eadfc7;
+  border-radius: 17px;
+  background: #faf3e4;
+  color: #a77a35;
+  font-size: 22px;
+}
+
+.store-promotion-eyebrow {
+  color: #947542;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.17em;
+}
+
+.store-promotion-dialog h2 {
+  margin-top: 11px;
+  color: #29352d;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(27px, 6vw, 38px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.12;
+}
+
+.store-promotion-message {
+  max-width: 340px;
+  margin-top: 12px;
+  color: #727a70;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.store-promotion-discount {
+  margin-top: 22px;
+  color: #cf4b32;
+  font-size: clamp(30px, 7vw, 42px);
+  font-weight: 750;
+  letter-spacing: -0.055em;
+}
+
+.store-promotion-code,
+.store-promotion-auto {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border: 1px dashed #d9c9a5;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.72);
+  color: #756038;
+  font-size: 12px;
+}
+
+.store-promotion-code b {
+  letter-spacing: 0.1em;
+}
+
+.store-promotion-code small {
+  color: #897c62;
+  font-size: 10px;
+}
+
+.store-promotion-continue {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 25px;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: #cf4b32;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  transition: transform 150ms ease, background 150ms ease;
+}
+
+.store-promotion-continue:hover {
+  transform: translateY(-1px);
+  background: #ad3925;
+}
+
+.store-promotion-dismiss {
+  margin-top: 14px;
+  padding: 7px 10px;
+  border: 0;
+  background: transparent;
+  color: #82877f;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.store-promotion-dismiss:hover {
+  color: #39443a;
+  text-decoration: underline;
+}
+
+@keyframes store-promotion-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes store-promotion-rise {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .store-promotion-overlay,
+  .store-promotion-dialog {
+    animation: none;
+  }
+
+  .store-promotion-continue {
+    transition: none;
+  }
+}

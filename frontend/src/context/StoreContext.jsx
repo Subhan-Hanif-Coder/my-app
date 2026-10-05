@@ -6,8 +6,10 @@ export const StoreContext = createContext(null);
 const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const url = "http://localhost:4000";
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(() => localStorage.getItem("token") || "");
   const [food_list, setFoodList] = useState([]);
+  const [foodLoading, setFoodLoading] = useState(true);
+  const [foodError, setFoodError] = useState("");
 
   // Add to cart function
   const addToCart = async (itemId) => {
@@ -57,11 +59,21 @@ const StoreContextProvider = (props) => {
 
   // Fetch food list from backend
   const fetchFoodList = async () => {
+    setFoodLoading(true);
+    setFoodError("");
     try {
       const response = await axios.get(url + "/api/food/list");
+      if (!response.data?.success || !Array.isArray(response.data.data)) {
+        throw new Error(response.data?.message || "The menu response was invalid.");
+      }
       setFoodList(response.data.data);
+      return true;
     } catch (error) {
-      console.log("Error fetching food list", error);
+      console.error("Error fetching food list", error);
+      setFoodError("We couldn't load the menu. Check your connection and try again.");
+      return false;
+    } finally {
+      setFoodLoading(false);
     }
   };
 
@@ -77,11 +89,11 @@ const StoreContextProvider = (props) => {
 
   // useEffect to handle token and initial data loading
   useEffect(() => {
-    async function loadData() {
-      await fetchFoodList();
-      if (localStorage.getItem("token")) {
-        setToken(localStorage.getItem("token"));
-        await loadCartData(localStorage.getItem("token"));
+    function loadData() {
+      void fetchFoodList();
+      const storedToken = localStorage.getItem("token");
+      if (storedToken) {
+        void loadCartData(storedToken);
       }
     }
     loadData();
@@ -89,6 +101,9 @@ const StoreContextProvider = (props) => {
 
   const contextValue = {
     food_list,
+    foodLoading,
+    foodError,
+    refreshFoodList: fetchFoodList,
     cartItems,
     setCartItems,
     addToCart,

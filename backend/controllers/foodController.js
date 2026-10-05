@@ -46,5 +46,17 @@ const removeFood = async (req, res) => {
     res.json({ success: false, message: "Error" });
   }
 };
+// Update food item price
+const updateFoodPrice = async (req, res) => {
+    try {
+        await foodModel.findByIdAndUpdate(req.body.id, { price: req.body.price });
+        res.json({ success: true, message: "Price Updated Successfully" });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: "Error updating price" });
+    }
+}
 
-export { addFood, listFood, removeFood };
+// Don't forget to export it along with other controllers
+
+export { addFood, listFood, removeFood ,updateFoodPrice};
