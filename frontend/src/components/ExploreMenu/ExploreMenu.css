@@ -1,4 +1,4 @@
-.explore-menu {
+/* .explore-menu {
   display: flex;
   flex-direction: column;
   gap: 13px;
@@ -211,5 +211,231 @@
 
   .explore-menu-list-item {
     min-width: 76px;
+  }
+} */
+.explore-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  padding: 4px 0 12px;
+}
+
+.explore-menu-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.explore-menu h1 {
+  color: #252923;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(25px, 3vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.section-eyebrow {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: var(--color-olive);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+.explore-menu-note {
+  padding-bottom: 4px;
+  color: #8a8f83;
+  font-size: 12px;
+}
+
+.explore-menu-text {
+  max-width: 650px;
+  color: #73796f;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.explore-menu-list {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(14px, 3vw, 32px);
+  margin: 12px 0 8px;
+  overflow-x: auto;
+  padding: 5px 2px 11px;
+  text-align: center;
+  scrollbar-width: thin;
+  scrollbar-color: #d9ddd3 transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.explore-menu-list::-webkit-scrollbar {
+  height: 5px;
+}
+
+.explore-menu-list::-webkit-scrollbar-thumb {
+  border-radius: 99px;
+  background: #d9ddd3;
+}
+
+.explore-menu-list-item {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  min-width: 88px;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.explore-menu-list-item img,
+.explore-menu-all-icon {
+  display: grid;
+  width: clamp(66px, 7vw, 84px);
+  aspect-ratio: 1;
+  place-items: center;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 5px 15px rgba(42, 46, 34, 0.1);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.explore-menu-list-item:hover img,
+.explore-menu-list-item:hover .explore-menu-all-icon {
+  transform: translateY(-3px);
+}
+
+.explore-menu-list-item.active img,
+.explore-menu-list-item.active .explore-menu-all-icon {
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 4px rgba(207, 75, 50, 0.11);
+}
+
+.explore-menu-list-item > span:not(.explore-menu-all-icon) {
+  color: #555e53;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.explore-menu-list-item.active > span:not(.explore-menu-all-icon) {
+  color: var(--color-brand);
+}
+
+.explore-menu-list-item small {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  display: grid;
+  min-width: 20px;
+  height: 20px;
+  place-items: center;
+  padding: 0 5px;
+  border: 2px solid var(--color-cream);
+  border-radius: 999px;
+  background: #fff;
+  color: #7a8075;
+  font-size: 9px;
+  font-weight: 700;
+  box-shadow: 0 3px 10px rgba(42, 46, 34, 0.1);
+}
+
+.explore-menu-list-item.active small {
+  background: var(--color-brand);
+  color: #fff;
+}
+
+.explore-menu-all {
+  min-width: 88px;
+  padding-top: 2px;
+}
+
+.explore-menu-all-icon {
+  background: linear-gradient(145deg, #fff2dd, #f8dfbb);
+  color: var(--color-brand);
+  font-size: 28px;
+}
+
+.explore-menu hr {
+  height: 1px;
+  margin: 4px 0 0;
+  border: 0;
+  background: #e8e8e0;
+}
+
+.explore-menu-list-item:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 4px;
+}
+
+@media (max-width: 750px) {
+  .explore-menu {
+    gap: 10px;
+  }
+
+  .explore-menu-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .explore-menu-text {
+    font-size: 12px;
+  }
+
+  .explore-menu-note {
+    padding-bottom: 0;
+    font-size: 11px;
+  }
+
+  .explore-menu-list {
+    gap: 12px;
+    margin-top: 7px;
+    padding-bottom: 9px;
+  }
+
+  .explore-menu-list-item {
+    min-width: 76px;
+  }
+
+  .explore-menu-list-item img,
+  .explore-menu-all-icon {
+    width: 66px;
+  }
+
+  .explore-menu-list-item small {
+    top: 0;
+    right: 0;
+    min-width: 18px;
+    height: 18px;
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 420px) {
+  .explore-menu-list {
+    gap: 10px;
+  }
+
+  .explore-menu-list-item {
+    min-width: 70px;
+  }
+
+  .explore-menu-list-item img,
+  .explore-menu-all-icon {
+    width: 60px;
+  }
+
+  .explore-menu-list-item > span:not(.explore-menu-all-icon) {
+    font-size: 10px;
   }
 }
