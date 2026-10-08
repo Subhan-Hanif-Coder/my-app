@@ -85,6 +85,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiTag, FiX } from "react-icons/fi";
 import "./PromotionBanner.css";
+import { API_BASE_URL } from "../../config/api";
 
 const formatDiscount = (promotion) =>
   promotion.discountType === "percentage"
@@ -94,14 +95,11 @@ const formatDiscount = (promotion) =>
 const PromotionBanner = ({ showOffer, onClose }) => {
   const [promotions, setPromotions] = useState([]);
 
-  // Live Vercel Backend URL
-  const url = "https://my-app-backend-jade.vercel.app";
-
   useEffect(() => {
     let cancelled = false;
 
     axios
-      .get(`${url}/api/order/promotions/active`)
+      .get(`${API_BASE_URL}/api/order/promotions/active`)
       .then((response) => {
         if (
           !cancelled &&

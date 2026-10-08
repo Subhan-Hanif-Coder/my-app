@@ -1,20 +1,85 @@
 import orderModel, { reservationModel } from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
 import mongoose from "mongoose";
+import {
+  sendAdminOrderNotification,
+  sendOrderDeliveredNotification,
+  sendOrderPlacedNotification,
+} from "../utils/sendCustomerNotification.js";
 
 const verifyOrder = async (req, res) => {
   const { orderId, success } = req.body;
   try {
     if (success === "true" || success === true) {
-      await orderModel.findByIdAndUpdate(orderId, { payment: true });
-      res.json({ success: true, message: "Paid" });
+      const order = await orderModel.findOneAndUpdate(
+        {
+          _id: orderId,
+          payment: { $ne: true },
+          paymentMethod: { $ne: "cod" },
+        },
+        { payment: true },
+        { new: true }
+      );
+
+      if (!order) {
+        const existingOrder = await orderModel.findById(orderId);
+        if (!existingOrder) {
+          return res.status(404).json({ success: false, message: "Order not found." });
+        }
+        return res.json({
+          success: Boolean(existingOrder.payment),
+          message: existingOrder.payment ? "Paid" : "Payment was not confirmed.",
+        });
+      }
+
+      let customer;
+      try {
+        customer = await userModel.findById(order.userId).select("name email").lean();
+      } catch (customerError) {
+        console.error(
+          "Online order was paid, but its customer details could not be loaded",
+          customerError?.code || customerError?.name || "Unknown database error"
+        );
+      }
+
+      let emailNotificationSent = false;
+      try {
+        if (!customer?.email) {
+          throw new Error("The order customer does not have an email address.");
+        }
+        await sendOrderPlacedNotification(customer.email, customer.name, order);
+        emailNotificationSent = true;
+      } catch (emailError) {
+        console.error(
+          "Online order was paid, but its confirmation email could not be sent",
+          emailError?.code || emailError?.name || "Unknown email error"
+        );
+      }
+
+      let adminEmailNotificationSent = false;
+      try {
+        await sendAdminOrderNotification(customer?.email, customer?.name, order);
+        adminEmailNotificationSent = true;
+      } catch (emailError) {
+        console.error(
+          "Online order was paid, but its admin notification email could not be sent",
+          emailError?.code || emailError?.name || "Unknown email error"
+        );
+      }
+
+      return res.json({
+        success: true,
+        message: "Paid",
+        emailNotificationSent,
+        adminEmailNotificationSent,
+      });
     } else {
       await orderModel.findByIdAndDelete(orderId);
-      res.json({ success: false, message: "Not Paid" });
+      return res.json({ success: false, message: "Not Paid" });
     }
   } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: "Error" });
+    console.error("Unable to verify order payment", error);
+    return res.status(500).json({ success: false, message: "We couldn't verify the payment." });
   }
 };
 
@@ -155,14 +220,61 @@ const listOrders = async (req, res) => {
 
 // Api for updating order status
 const updateStatus = async (req, res) => {
+  const { orderId, status } = req.body || {};
+  const allowedStatuses = ["Food Processing", "Out for delivery", "Delivered"];
+
+  if (!mongoose.isValidObjectId(orderId) || !allowedStatuses.includes(status)) {
+    return res.status(400).json({ success: false, message: "Invalid order or status." });
+  }
+
   try {
-    await orderModel.findByIdAndUpdate(req.body.orderId, {
-      status: req.body.status,
+    const updatedOrder = status === "Delivered"
+      ? await orderModel.findOneAndUpdate(
+          { _id: orderId, status: { $ne: "Delivered" } },
+          { status },
+          { new: true, runValidators: true }
+        )
+      : await orderModel.findByIdAndUpdate(
+          orderId,
+          { status },
+          { new: true, runValidators: true }
+        );
+
+    if (!updatedOrder) {
+      const existingOrder = await orderModel.findById(orderId);
+      if (!existingOrder) {
+        return res.status(404).json({ success: false, message: "Order not found." });
+      }
+      return res.json({ success: true, message: "Status Updated", emailNotificationSent: null });
+    }
+
+    if (status !== "Delivered") {
+      return res.json({ success: true, message: "Status Updated" });
+    }
+
+    let emailNotificationSent = false;
+    try {
+      const customer = await userModel.findById(updatedOrder.userId).select("name email").lean();
+      if (!customer?.email) {
+        throw new Error("The order customer does not have an email address.");
+      }
+      await sendOrderDeliveredNotification(customer.email, customer.name, updatedOrder);
+      emailNotificationSent = true;
+    } catch (emailError) {
+      console.error(
+        "Order was marked delivered, but its notification email could not be sent",
+        emailError?.code || emailError?.name || "Unknown email error"
+      );
+    }
+
+    return res.json({
+      success: true,
+      message: "Status Updated",
+      emailNotificationSent,
     });
-    res.json({ success: true, message: "Status Updated" });
   } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: "Error" });
+    console.error("Unable to update order status", error);
+    return res.status(500).json({ success: false, message: "We couldn't update order status." });
   }
 };
 

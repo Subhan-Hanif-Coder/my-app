@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Add.css'
 import { assets } from '../../assets/assets'
 import axios from 'axios'
@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 
 const Add = ({ url }) => {
   const [image, setImage] = useState(false);
+  const [imagePreview, setImagePreview] = useState("");
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     name: "",
@@ -19,6 +20,16 @@ const Add = ({ url }) => {
     const value = event.target.value;
     setData(data => ({ ...data, [name]: value }))
   }
+
+  useEffect(() => () => {
+    if (imagePreview) URL.revokeObjectURL(imagePreview);
+  }, [imagePreview]);
+
+  const onImageChange = (event) => {
+    const file = event.target.files?.[0] || false;
+    setImage(file);
+    setImagePreview(file ? URL.createObjectURL(file) : "");
+  };
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
@@ -42,10 +53,10 @@ const Add = ({ url }) => {
         setImage(false)
         toast.success(response.data.message)
       } else {
-        toast.error(response.data.message)
+        toast.error(response.data.message || "Could not add this dish.")
       }
     } catch (error) {
-      toast.error("Error uploading food item");
+      toast.error(error.response?.data?.message || "Error uploading food item");
     } finally {
       setLoading(false);
     }
@@ -56,7 +67,7 @@ const Add = ({ url }) => {
       <div className="saas-header-dark">
         <div className="saas-title-group">
           <h3>Catalog Admin: <span>Add New Dish Workspace</span></h3>
-          <p>Upload high-resolution assets and configure catalog pricing</p>
+          <p>Add a dish once; it will appear in your storefront menu immediately.</p>
         </div>
       </div>
 
@@ -64,16 +75,23 @@ const Add = ({ url }) => {
         <form className='saas-form-box' onSubmit={onSubmitHandler}>
           
           <div className='add-img-upload flex-col'>
-            <p className="form-label-dark">Upload Dish Image</p>
-            <label htmlFor="image" className="image-upload-wrapper-dark">
+            <p className="form-label-dark">Dish image <span aria-hidden="true">·</span> Required</p>
+            <label htmlFor="image" className="image-upload-wrapper-dark" tabIndex="0">
               <img 
-                src={image ? URL.createObjectURL(image) : assets.upload_area} 
-                alt="Upload preview" 
+                src={imagePreview || assets.upload_area}
+                alt={image ? `Preview of ${image.name}` : "Choose an image to upload"}
                 className={image ? "preview-img-active" : "upload-placeholder-img"} 
               />
-              {!image && <span className="upload-text-hint">Click to browse image</span>}
+              <span className="upload-text-hint">{image ? "Click to replace image" : "Choose a clear photo · JPG, PNG or WebP"}</span>
             </label>
-            <input onChange={(e) => setImage(e.target.files[0])} type="file" id="image" hidden required />
+            <input
+              onChange={onImageChange}
+              type="file"
+              id="image"
+              accept="image/jpeg,image/png,image/webp"
+              hidden
+              required
+            />
           </div>
 
           <div className='add-product-name flex-col'>
@@ -122,7 +140,9 @@ const Add = ({ url }) => {
               <input 
                 onChange={onChangeHandler} 
                 value={data.price} 
-                type="Number" 
+                type="number"
+                min="0.01"
+                step="0.01"
                 name='price' 
                 placeholder='20' 
                 className="saas-input-dark"

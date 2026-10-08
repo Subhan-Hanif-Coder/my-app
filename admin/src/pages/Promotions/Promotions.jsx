@@ -52,6 +52,7 @@ const Promotions = ({ url, adminKey }) => {
   const [editingId, setEditingId] = useState("");
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [promotionFilter, setPromotionFilter] = useState("All");
 
   const requestConfig = useMemo(
     () => ({
@@ -116,6 +117,14 @@ const Promotions = ({ url, adminKey }) => {
         throw new Error(response.data?.message || "We couldn't save this promotion.");
       }
       toast.success(editingId ? "Promotion updated." : "Promotion created.");
+      const emailNotification = response.data.emailNotification;
+      if (emailNotification?.error) {
+        toast.error("Promotion saved, but the customer announcement email could not be sent. Check backend email settings.");
+      } else if (emailNotification?.failed > 0) {
+        toast.error(`Offer email sent to ${emailNotification.sent} customers; ${emailNotification.failed} emails failed.`);
+      } else if (emailNotification?.sent > 0) {
+        toast.info(`Offer emailed to ${emailNotification.sent} verified customers.`);
+      }
       resetForm();
       setPromotions(await fetchPromotions());
     } catch (error) {
@@ -148,6 +157,16 @@ const Promotions = ({ url, adminKey }) => {
       toast.error(error.response?.data?.message || error.message || "We couldn't update this promotion.");
     }
   };
+
+  const promotionCounts = promotions.reduce((counts, promotion) => {
+    const status = getStatus(promotion);
+    counts[status] = (counts[status] || 0) + 1;
+    return counts;
+  }, {});
+  const visiblePromotions = promotionFilter === "All"
+    ? promotions
+    : promotions.filter((promotion) => getStatus(promotion) === promotionFilter);
+  const promotionFilters = ["All", "Active", "Scheduled", "Paused", "Expired"];
 
   return (
     <main className="promotions-page">
@@ -233,14 +252,27 @@ const Promotions = ({ url, adminKey }) => {
             <span className="promotion-card-icon"><FiTag /></span>
             <div>
               <h2>Your offers</h2>
-              <p>Pause or edit offers whenever you need.</p>
+              <p>{promotions.length} saved offer{promotions.length === 1 ? "" : "s"} · manage status and details.</p>
             </div>
+          </div>
+          <div className="promotion-filter-tabs" role="group" aria-label="Filter offers by status">
+            {promotionFilters.map((filter) => (
+              <button
+                type="button"
+                key={filter}
+                className={promotionFilter === filter ? "active" : ""}
+                aria-pressed={promotionFilter === filter}
+                onClick={() => setPromotionFilter(filter)}
+              >
+                {filter}<span>{filter === "All" ? promotions.length : promotionCounts[filter] || 0}</span>
+              </button>
+            ))}
           </div>
           {loading ? (
             <p className="promotion-list-message">Loading promotions…</p>
-          ) : promotions.length ? (
+          ) : visiblePromotions.length ? (
             <div className="promotion-list">
-              {promotions.map((promotion) => {
+              {visiblePromotions.map((promotion) => {
                 const status = getStatus(promotion);
                 return (
                   <article className="promotion-list-item" key={promotion._id}>
@@ -267,7 +299,11 @@ const Promotions = ({ url, adminKey }) => {
               })}
             </div>
           ) : (
-            <p className="promotion-list-message">No promotions yet. Create your first offer here.</p>
+            <p className="promotion-list-message">
+              {promotions.length
+                ? `No ${promotionFilter.toLowerCase()} promotions. Choose another filter to see the rest.`
+                : "No promotions yet. Create your first offer here."}
+            </p>
           )}
         </section>
       </div>

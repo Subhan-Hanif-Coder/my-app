@@ -14,6 +14,7 @@ const Navbar = ({ onLogout, isSidebarOpen, onToggleSidebar }) => {
     "/completed-orders": ["Completed orders", "Review delivered customer orders"],
     "/reports-payroll": ["Reports & payroll", "Business performance and monthly salaries"],
     "/print-reports": ["Print reports", "Daily, weekly, monthly and yearly summary"],
+    "/promotions": ["Promotions", "Offers, discount codes and customer campaigns"],
   }[pathname] || ["Restaurant workspace", "Your operations at a glance"];
 
   return (

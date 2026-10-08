@@ -57,6 +57,9 @@ const summarizeOrders = async (start, end) => {
         orderCount: { $sum: 1 },
         sales: { $sum: { $ifNull: ["$amount", 0] } },
         paidSales: { $sum: { $cond: ["$payment", { $ifNull: ["$amount", 0] }, 0] } },
+        paidOrderCount: { $sum: { $cond: ["$payment", 1, 0] } },
+        onlinePaymentCount: { $sum: { $cond: [{ $eq: ["$paymentMethod", "online"] }, 1, 0] } },
+        cashOnDeliveryCount: { $sum: { $cond: [{ $eq: ["$paymentMethod", "cod"] }, 1, 0] } },
         deliveredCount: { $sum: { $cond: [{ $eq: ["$status", "Delivered"] }, 1, 0] } },
         processingCount: { $sum: { $cond: [{ $eq: ["$status", "Food Processing"] }, 1, 0] } },
         deliveryCount: { $sum: { $cond: [{ $eq: ["$status", "Out for delivery"] }, 1, 0] } },
@@ -91,6 +94,9 @@ const summarizeOrders = async (start, end) => {
     orderCount: summary?.orderCount || 0,
     sales: summary?.sales || 0,
     paidSales: summary?.paidSales || 0,
+    paidOrderCount: summary?.paidOrderCount || 0,
+    onlinePaymentCount: summary?.onlinePaymentCount || 0,
+    cashOnDeliveryCount: summary?.cashOnDeliveryCount || 0,
     deliveredCount: summary?.deliveredCount || 0,
     processingCount: summary?.processingCount || 0,
     deliveryCount: summary?.deliveryCount || 0,
@@ -98,6 +104,81 @@ const summarizeOrders = async (start, end) => {
     averageOrderValue: summary?.orderCount ? summary.sales / summary.orderCount : 0,
     topItems
   };
+};
+
+const buildTrend = async (start, end, period, timezoneOffset) => {
+  const format = period === "daily"
+    ? "%Y-%m-%dT%H"
+    : period === "yearly"
+      ? "%Y-%m"
+      : "%Y-%m-%d";
+  const shiftMilliseconds = -timezoneOffset * 60 * 1000;
+  const groupedBuckets = await orderModel.aggregate([
+    { $match: { date: { $gte: start, $lt: end } } },
+    {
+      $group: {
+        _id: {
+          $dateToString: {
+            format,
+            date: { $add: ["$date", shiftMilliseconds] },
+            timezone: "UTC"
+          }
+        },
+        orders: { $sum: 1 },
+        sales: { $sum: { $ifNull: ["$amount", 0] } },
+        paidSales: { $sum: { $cond: ["$payment", { $ifNull: ["$amount", 0] }, 0] } }
+      }
+    },
+    { $sort: { _id: 1 } }
+  ]);
+
+  const localStart = new Date(start.getTime() - shiftMilliseconds);
+  let keys = [];
+
+  if (period === "daily") {
+    keys = Array.from({ length: 24 }, (_, hour) => {
+      const bucket = new Date(Date.UTC(
+        localStart.getUTCFullYear(),
+        localStart.getUTCMonth(),
+        localStart.getUTCDate(),
+        hour
+      ));
+      return bucket.toISOString().slice(0, 13);
+    });
+  } else if (period === "yearly") {
+    keys = Array.from({ length: 12 }, (_, month) =>
+      new Date(Date.UTC(localStart.getUTCFullYear(), month, 1))
+        .toISOString()
+        .slice(0, 7)
+    );
+  } else {
+    const bucketCount = period === "weekly"
+      ? 7
+      : new Date(Date.UTC(
+          localStart.getUTCFullYear(),
+          localStart.getUTCMonth() + 1,
+          0
+        )).getUTCDate();
+
+    keys = Array.from({ length: bucketCount }, (_, day) =>
+      new Date(Date.UTC(
+        localStart.getUTCFullYear(),
+        localStart.getUTCMonth(),
+        localStart.getUTCDate() + day
+      )).toISOString().slice(0, 10)
+    );
+  }
+
+  const bucketsByKey = new Map(groupedBuckets.map((bucket) => [bucket._id, bucket]));
+  return keys.map((key) => {
+    const bucket = bucketsByKey.get(key);
+    return {
+      key,
+      orders: bucket?.orders || 0,
+      sales: bucket?.sales || 0,
+      paidSales: bucket?.paidSales || 0
+    };
+  });
 };
 
 const getBusinessReport = async (req, res) => {
@@ -129,16 +210,18 @@ const getBusinessReport = async (req, res) => {
 
   try {
     const reportData = await Promise.all(reports.map(async ({ period: reportPeriod, range }) => {
-      const [current, previous] = await Promise.all([
+      const [current, previous, trend] = await Promise.all([
         summarizeOrders(range.start, range.end),
-        summarizeOrders(range.previousStart, range.previousEnd)
+        summarizeOrders(range.previousStart, range.previousEnd),
+        buildTrend(range.start, range.end, reportPeriod, timezoneOffset)
       ]);
       return {
         period: reportPeriod,
         start: range.start,
         end: range.end,
         current,
-        previous
+        previous,
+        trend
       };
     }));
     if (period === "all") {

@@ -10,11 +10,13 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import ReportsPayroll from "./pages/ReportsPayroll/ReportsPayroll";
 import PrintReports from "./pages/PrintReports/PrintReports";
 import Promotions from "./pages/Promotions/Promotions";
+import { API_BASE_URL } from "./config/api";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import "./AdminPolish.css";
 
-const API_URL = "https://my-app-backend-jade.vercel.app";
+const API_URL = API_BASE_URL;
 
 const App = () => {
   const navigate = useNavigate();
@@ -165,7 +167,7 @@ const App = () => {
 
         <main className="admin-main">
           <Routes>
-            <Route path="/" element={<Dashboard url={API_URL} />} />
+            <Route path="/" element={<Dashboard url={API_URL} adminKey={adminApiKey} />} />
 
             <Route path="/add" element={<Add url={API_URL} />} />
 

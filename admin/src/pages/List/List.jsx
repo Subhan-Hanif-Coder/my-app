@@ -30,6 +30,11 @@ const List = ({ url }) => {
   }
 
   const removeFood = async (foodId) => {
+    const item = list.find((entry) => entry._id === foodId);
+    if (!window.confirm(`Remove ${item?.name || "this dish"} from the menu? This cannot be undone.`)) {
+      return;
+    }
+
     try {
       const response = await axios.post(`${url}/api/food/remove`, { id: foodId });
       if (response.data.success) {
@@ -75,7 +80,7 @@ const List = ({ url }) => {
   const totalItems = list.length;
   const avgPrice = totalItems > 0 ? (list.reduce((acc, item) => acc + item.price, 0) / totalItems).toFixed(2) : 0;
 
-  const categories = ['All', 'Salad', 'Rolls', 'Deserts', 'Sandwich', 'Cake', 'Pure Veg', 'Pasta', 'Noodles'];
+  const categories = ['All', ...new Set(list.map((item) => item.category).filter(Boolean))];
 
   const filteredList = list.filter(item => {
     const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
@@ -169,7 +174,7 @@ const List = ({ url }) => {
               </div>
 
               <div className="row-col-main">
-                <p className='customer-text' style={{ fontSize: '15px', fontWeight: '600', color: '#f8fafc' }}>{item.name}</p>
+                <p className='customer-text' style={{ fontSize: '15px', fontWeight: '600', color: '#263747' }}>{item.name}</p>
                 <span className="row-hash-tag">ID: #{item._id.slice(-5).toUpperCase()}</span>
               </div>
 
@@ -181,7 +186,9 @@ const List = ({ url }) => {
                 {editingId === item._id ? (
                   <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
                     <input 
-                      type="number" 
+                      type="number"
+                      min="0.01"
+                      step="0.01"
                       value={newPrice} 
                       onChange={(e) => setNewPrice(e.target.value)} 
                       style={{ width: '70px', padding: '4px', background: '#0b0f19', border: '1px solid #38bdf8', color: '#fff', borderRadius: '4px' }}
@@ -194,7 +201,7 @@ const List = ({ url }) => {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <p className="bill-val text-emerald-glow" style={{ fontSize: '16px', fontWeight: '700' }}>${item.price.toFixed(2)}</p>
                     <button 
-                      onClick={() => { setEditingId(item._id); setNewPrice(item.price); }} 
+                      onClick={() => { setEditingId(item._id); setNewPrice(String(item.price)); }}
                       style={{ background: 'rgba(56, 189, 248, 0.1)', color: '#38bdf8', border: '1px solid rgba(56, 189, 248, 0.2)', padding: '3px 8px', borderRadius: '4px', fontSize: '11px', cursor: 'pointer' }}
                     >
                       ✏️️ Edit

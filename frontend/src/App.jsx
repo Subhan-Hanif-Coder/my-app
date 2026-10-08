@@ -382,7 +382,6 @@ const App = () => {
     setShowLogin
   ] = useState(false)
 
-
   const [
     notification,
     setNotification
@@ -401,7 +400,6 @@ const App = () => {
 
   const navigate =
     useNavigate()
-
 
   const visibleNotification =
     location.state?.notification ||

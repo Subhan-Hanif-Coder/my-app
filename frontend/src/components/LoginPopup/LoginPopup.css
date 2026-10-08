@@ -118,3 +118,196 @@
   font-weight: 700;
   cursor: pointer;
 }
+
+.login-popup {
+  overflow-y: auto;
+  align-items: center;
+  background: rgba(21, 27, 22, 0.68);
+  backdrop-filter: blur(9px);
+  animation: auth-overlay-in 220ms ease both;
+}
+
+.login-popup-container {
+  position: relative;
+  width: min(100%, 440px);
+  gap: 19px;
+  padding: 38px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 100% 0, rgba(207, 75, 50, 0.1), transparent 38%),
+    #fffdf9;
+  color: #687067;
+  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.28);
+  animation: auth-card-in 420ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.login-popup-mark {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border-radius: 15px;
+  background: linear-gradient(145deg, #df6447, #b83d2a);
+  color: #fff;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 24px;
+  font-weight: 800;
+  box-shadow: 0 8px 18px rgba(184, 61, 42, 0.23);
+}
+
+.login-popup-title {
+  align-items: flex-start;
+  color: #29312b;
+}
+
+.login-popup-title h2 {
+  margin-top: 5px;
+  font-size: clamp(27px, 6vw, 34px);
+  letter-spacing: -0.035em;
+}
+
+.login-popup-title p {
+  margin-top: 6px;
+  color: #777d72;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.login-popup-eyebrow {
+  color: var(--color-olive);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.17em;
+}
+
+.login-popup-close {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid #ebe7df;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.76);
+  cursor: pointer;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.login-popup-close:hover {
+  transform: rotate(90deg);
+  background: #f6eee6;
+}
+
+.login-popup-close img {
+  display: block;
+  width: 13px;
+  height: 13px;
+}
+
+.login-popup-inputs {
+  gap: 13px;
+}
+
+.login-popup-inputs input {
+  min-height: 51px;
+  padding: 0 15px;
+  border-color: #e7e3da;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.88);
+  font-size: 14px;
+}
+
+.login-popup-inputs input:focus {
+  border-color: #c96a52;
+  box-shadow: 0 0 0 4px rgba(207, 75, 50, 0.1);
+}
+
+.login-popup-container > button[type="submit"] {
+  min-height: 51px;
+  border-radius: 11px;
+  background: linear-gradient(110deg, #d9573c, #b83d2a);
+  box-shadow: 0 8px 18px rgba(184, 61, 42, 0.19);
+  font-size: 14px;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.login-popup-container > button[type="submit"]:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(110deg, #c84a32, #a93421);
+  box-shadow: 0 12px 24px rgba(184, 61, 42, 0.25);
+}
+
+.login-popup-container > p {
+  color: #71766e;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.login-popup-container > p button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-brand);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.login-popup-container > p button:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.login-popup-condition {
+  gap: 10px;
+  margin-top: -4px;
+}
+
+.login-popup-condition p {
+  color: #787e74;
+}
+
+.login-popup-forgot {
+  align-self: flex-end;
+  margin: -7px 0 -9px;
+  color: var(--color-brand) !important;
+  font-size: 12px !important;
+  font-weight: 700;
+}
+
+.login-popup-forgot:focus-visible {
+  border-radius: 3px;
+  outline: 2px solid var(--color-brand);
+  outline-offset: 3px;
+}
+
+.login-popup-error {
+  padding: 10px 12px;
+  border: 1px solid #f1c9bf;
+  border-radius: 9px;
+  background: #fff4f1;
+}
+
+@keyframes auth-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes auth-card-in {
+  from { opacity: 0; transform: translateY(18px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 500px) {
+  .login-popup {
+    padding: 14px;
+  }
+
+  .login-popup-container {
+    gap: 17px;
+    padding: 27px 22px;
+    border-radius: 20px;
+  }
+}

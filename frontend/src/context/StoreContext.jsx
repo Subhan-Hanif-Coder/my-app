@@ -124,14 +124,14 @@
 // export default StoreContextProvider;
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../config/api";
 
 export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
 
-  // Live Vercel Backend URL
-  const url = "https://my-app-backend-jade.vercel.app";
+  const url = API_BASE_URL;
 
   const [token, setToken] = useState(() => localStorage.getItem("token") || "");
   const [food_list, setFoodList] = useState([]);

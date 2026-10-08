@@ -87,10 +87,10 @@ const OrderCard = ({ order, url, isExpanded, onToggle, onReorder, isReordering, 
           </p>
         </div>
         <div className="my-order-total">
-          <small>Total paid</small>
+          <small>Order total</small>
           <b>{formatMoney(order.amount)}</b>
           <span className={order.payment ? 'payment-paid' : 'payment-pending'}>
-            {order.payment ? 'Paid online' : 'Payment pending'}
+            {order.payment ? 'Paid online' : order.paymentMethod === 'cod' ? 'Cash on delivery' : 'Payment pending'}
           </span>
         </div>
         <div className="my-order-actions">

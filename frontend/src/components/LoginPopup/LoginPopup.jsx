@@ -582,25 +582,31 @@ const LoginPopup = ({ setShowLogin, onSuccess }) => {
 
       <form
         onSubmit={onLogin}
-        className="login-popup-container"
+        className={`login-popup-container ${currState === "Sign Up" ? "is-signup" : ""}`}
       >
 
+        <div className="login-popup-mark" aria-hidden="true">T</div>
 
         {/* TITLE */}
 
         <div className="login-popup-title">
 
-          <h2>
-            {currState}
-          </h2>
+          <div>
+            <span className="login-popup-eyebrow">TOMATO RESTAURANT</span>
+            <h2>{currState === "Login" ? "Welcome back" : "Join the table"}</h2>
+            <p>{currState === "Login" ? "Sign in to continue to your account." : "Create an account to save your favourites."}</p>
+          </div>
 
-          <img
+          <button
+            className="login-popup-close"
+            type="button"
+            aria-label="Close sign in dialog"
             onClick={() =>
               setShowLogin(false)
             }
-            src={assets.cross_icon}
-            alt=""
-          />
+          >
+            <img src={assets.cross_icon} alt="" />
+          </button>
 
         </div>
 
@@ -621,6 +627,7 @@ const LoginPopup = ({ setShowLogin, onSuccess }) => {
               value={data.name}
               type="text"
               placeholder="Your name"
+              autoComplete="name"
               required
             />
 
@@ -633,6 +640,7 @@ const LoginPopup = ({ setShowLogin, onSuccess }) => {
             value={data.email}
             type="email"
             placeholder="Your email"
+            autoComplete="email"
             required
           />
 
@@ -643,6 +651,8 @@ const LoginPopup = ({ setShowLogin, onSuccess }) => {
             value={data.password}
             type="password"
             placeholder="Password"
+            autoComplete={currState === "Login" ? "current-password" : "new-password"}
+            minLength={currState === "Sign Up" ? 8 : undefined}
             required
           />
 
@@ -669,7 +679,15 @@ const LoginPopup = ({ setShowLogin, onSuccess }) => {
 
           <p
             className="login-popup-forgot"
+            role="button"
+            tabIndex={0}
             onClick={openForgotPassword}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                openForgotPassword();
+              }
+            }}
           >
             Forgot Password?
           </p>
@@ -718,7 +736,8 @@ const LoginPopup = ({ setShowLogin, onSuccess }) => {
 
             Create a new account?{" "}
 
-            <span
+            <button
+              type="button"
               onClick={() => {
 
                 setCurrState("Sign Up");
@@ -727,8 +746,8 @@ const LoginPopup = ({ setShowLogin, onSuccess }) => {
 
               }}
             >
-              Click here
-            </span>
+              Create account
+            </button>
 
           </p>
 
@@ -738,7 +757,8 @@ const LoginPopup = ({ setShowLogin, onSuccess }) => {
 
             Already have an account?{" "}
 
-            <span
+            <button
+              type="button"
               onClick={() => {
 
                 setCurrState("Login");
@@ -747,8 +767,8 @@ const LoginPopup = ({ setShowLogin, onSuccess }) => {
 
               }}
             >
-              Login here
-            </span>
+              Sign in
+            </button>
 
           </p>
 

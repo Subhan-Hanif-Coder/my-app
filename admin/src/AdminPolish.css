@@ -1,0 +1,392 @@
+.admin-main > .business-page,
+.admin-main > .print-report-page,
+.admin-main > .promotions-page {
+  width: min(100%, 1560px);
+  padding-top: clamp(24px, 3vw, 38px);
+  padding-right: clamp(16px, 3vw, 42px);
+  padding-bottom: 48px;
+  padding-left: clamp(16px, 3vw, 42px);
+  animation: admin-content-in 240ms ease both;
+}
+
+.admin-shell button,
+.admin-shell input,
+.admin-shell select,
+.admin-shell textarea {
+  font-family: inherit;
+}
+
+.admin-shell button:focus-visible,
+.admin-shell a:focus-visible,
+.admin-shell input:focus-visible,
+.admin-shell select:focus-visible,
+.admin-shell textarea:focus-visible {
+  outline: 3px solid rgba(54, 118, 83, 0.25);
+  outline-offset: 2px;
+}
+
+.admin-main .saas-title-group h3,
+.admin-main .business-header h1,
+.admin-main .print-report-toolbar h1,
+.admin-main .promotions-header h1 {
+  color: #26362c;
+}
+
+.admin-main .saas-title-group p,
+.admin-main .business-header p,
+.admin-main .print-report-toolbar > div:first-child > p,
+.admin-main .promotions-header p {
+  max-width: 660px;
+  color: #748078;
+  line-height: 1.65;
+}
+
+.admin-main .saas-btn-sync,
+.admin-main .business-refresh,
+.admin-main .print-report-actions button,
+.admin-main .promotion-save-button,
+.admin-main .promotion-secondary-button {
+  min-height: 39px;
+  border-radius: 8px;
+  font-weight: 700;
+  transition: background 150ms ease, border-color 150ms ease, transform 150ms ease;
+}
+
+.admin-main .saas-btn-sync:hover:not(:disabled),
+.admin-main .business-refresh:hover:not(:disabled),
+.admin-main .print-report-actions button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.admin-main .business-report-panel,
+.admin-main .business-payroll-section,
+.admin-main .print-report-sheet,
+.admin-main .promotion-form-card,
+.admin-main .promotion-list-card {
+  border-color: #e2e9e3;
+  border-radius: 13px;
+  box-shadow: 0 6px 22px rgba(35, 51, 41, 0.035);
+}
+
+.admin-main .business-kpi-card,
+.admin-main .business-detail-card,
+.admin-main .business-form-card,
+.admin-main .business-staff-card {
+  border-color: #e7ece8;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+.admin-main .business-report-detail-grid,
+.admin-main .business-payroll-grid {
+  gap: 13px;
+}
+
+.admin-main .business-top-item {
+  min-height: 42px;
+  border-bottom-color: #edf1ed;
+}
+
+.admin-main .business-report-controls input,
+.admin-main .business-payroll-period input,
+.admin-main .business-form-card input,
+.admin-main .business-form-card select,
+.admin-main .promotion-form input:not([type="checkbox"]),
+.admin-main .promotion-form textarea,
+.admin-main .promotion-form select,
+.admin-main .print-report-date,
+.admin-main .executive-date-control input {
+  color-scheme: light;
+}
+
+.admin-main .print-report-table tbody tr:hover {
+  background: #f8fbf8;
+}
+
+.admin-main .print-report-help {
+  color: #77847a;
+}
+
+.admin-main .add-page-dark .saas-header-dark,
+.admin-main .list-page-light .saas-header-dark,
+.admin-main .orders-page-dark .saas-header-dark {
+  align-items: center;
+  gap: 14px;
+}
+
+.admin-main .add-page-dark .saas-form-box {
+  width: min(100%, 840px);
+  border-color: #e2e9e3;
+  border-radius: 13px;
+  background: #fff;
+  box-shadow: 0 7px 24px rgba(35, 51, 41, 0.045);
+}
+
+.admin-main .add-page-dark .form-label-dark {
+  color: #425349;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.admin-main .add-page-dark .image-upload-wrapper-dark {
+  max-width: 100%;
+  min-height: 148px;
+  border-color: #d4e0d7;
+  background: #f8fbf8;
+}
+
+.admin-main .add-page-dark .image-upload-wrapper-dark:hover {
+  border-color: #5f9270;
+  background: #f2f8f3;
+}
+
+.admin-main .add-page-dark .upload-text-hint {
+  color: #6e7d72;
+}
+
+.admin-main .add-page-dark .saas-input-dark,
+.admin-main .add-page-dark .saas-textarea-dark,
+.admin-main .add-page-dark .saas-select-dark,
+.admin-main .business-page input,
+.admin-main .business-page select,
+.admin-main .promotion-form input:not([type="checkbox"]),
+.admin-main .promotion-form textarea,
+.admin-main .promotion-form select {
+  min-height: 40px;
+  border-color: #dce5dd !important;
+  border-radius: 8px;
+  background-color: #fff !important;
+  color: #314239 !important;
+  font-size: 11px !important;
+}
+
+.admin-main .add-page-dark .saas-textarea-dark,
+.admin-main .promotion-form textarea {
+  min-height: 112px;
+}
+
+.admin-main .add-page-dark .saas-input-dark:focus,
+.admin-main .add-page-dark .saas-textarea-dark:focus,
+.admin-main .add-page-dark .saas-select-dark:focus {
+  border-color: #5b9770 !important;
+  box-shadow: 0 0 0 3px rgba(54, 118, 83, 0.11);
+}
+
+.admin-main .add-page-dark .saas-submit-btn {
+  background: #2c6645;
+  border-color: #2c6645;
+  border-radius: 8px;
+  font-size: 11px;
+}
+
+.admin-main .add-page-dark .saas-submit-btn:hover:not(:disabled) {
+  background: #205638;
+  filter: none;
+}
+
+.admin-main .list-page-light .analytics-grid-dark {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.admin-main .list-page-light .metric-flex {
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.admin-main .list-page-light .toolbar-box-dark {
+  align-items: stretch;
+}
+
+.admin-main .list-page-light .list-table-header-dark {
+  position: sticky;
+  z-index: 2;
+  top: 76px;
+}
+
+.admin-main .list-page-light .list-row-grid {
+  min-height: 76px;
+}
+
+.admin-main .list-page-light .row-col-main .customer-text {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+
+.admin-main .list-page-light .row-col-bill input {
+  width: 96px !important;
+  padding: 0 8px !important;
+}
+
+.admin-main .orders-page-dark .analytics-grid-dark {
+  align-items: stretch;
+}
+
+.admin-main .orders-page-dark .widget-box-dark {
+  min-height: 148px;
+  border: 1px solid #e3eae4;
+  border-radius: 11px;
+  background: #fff;
+  box-shadow: 0 5px 18px rgba(35, 51, 41, 0.035);
+}
+
+.admin-main .orders-page-dark .widget-head {
+  color: #53645a;
+}
+
+.admin-main .orders-page-dark .metric-title {
+  color: #738078;
+}
+
+.admin-main .orders-page-dark .metric-value {
+  font-variant-numeric: tabular-nums;
+}
+
+.admin-main .orders-page-dark .toolbar-box-dark {
+  flex-wrap: wrap;
+  border-color: #e3eae4;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.admin-main .orders-page-dark .search-input-wrap input {
+  min-height: 40px;
+  border-color: #dce5dd;
+  border-radius: 8px;
+  background: #fbfdfb;
+  color: #304136;
+}
+
+.admin-main .orders-page-dark .ft-btn {
+  border-radius: 7px;
+}
+
+.admin-main .orders-page-dark .order-row-card {
+  border-color: #e3eae4;
+  border-radius: 11px;
+  background: #fff;
+}
+
+.admin-main .orders-page-dark .customer-text,
+.admin-main .orders-page-dark .address-text,
+.admin-main .orders-page-dark .food-pill-dark,
+.admin-main .orders-page-dark .bill-val {
+  color: #34463a;
+}
+
+.admin-main .orders-page-dark .order-status-select,
+.admin-main .orders-page-dark .row-col-status select {
+  min-height: 36px;
+  border: 1px solid #dce5dd;
+  border-radius: 7px;
+  background-color: #fff;
+  color: #3c4c42;
+}
+
+.admin-main .reservation-admin-toolbar input,
+.admin-main .reservation-admin-status select {
+  min-height: 38px;
+  border-color: #dce5dd;
+  border-radius: 8px;
+  background: #fff;
+  color: #34463a;
+}
+
+.admin-main .reservation-admin-card {
+  border-color: #e3eae4;
+  border-radius: 11px;
+  background: #fff;
+}
+
+.admin-main .promotion-filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 0 0 13px;
+  padding: 4px;
+  border: 1px solid #e8ede9;
+  border-radius: 9px;
+  background: #f8faf8;
+}
+
+.admin-main .promotion-filter-tabs button {
+  display: inline-flex;
+  min-height: 31px;
+  align-items: center;
+  gap: 6px;
+  padding: 0 9px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: #65736a;
+  font: inherit;
+  font-size: 9px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.admin-main .promotion-filter-tabs button.active {
+  border-color: #dfe8e1;
+  background: #fff;
+  color: #2d6947;
+  box-shadow: 0 1px 3px rgba(31, 56, 39, 0.07);
+}
+
+.admin-main .promotion-filter-tabs button span {
+  min-width: 18px;
+  padding: 2px 4px;
+  border-radius: 99px;
+  background: #eef3ef;
+  color: #738078;
+  text-align: center;
+}
+
+.admin-main .promotion-item-actions button:hover,
+.admin-main .promotion-secondary-button:hover {
+  border-color: #b5ccba;
+  background: #f5faf5;
+  color: #2d6947;
+}
+
+.admin-main .promotion-save-button:hover:not(:disabled) {
+  background: #205638;
+}
+
+.admin-main .print-report-page {
+  color: #29372f;
+}
+
+.admin-main .print-report-actions button:focus-visible,
+.admin-main .promotion-item-actions button:focus-visible {
+  outline: 3px solid rgba(54, 118, 83, 0.25);
+  outline-offset: 2px;
+}
+
+@media (max-width: 760px) {
+  .admin-main > .business-page,
+  .admin-main > .print-report-page,
+  .admin-main > .promotions-page {
+    padding: 22px 14px 34px;
+  }
+
+  .admin-main .list-page-light .list-table-header-dark {
+    position: static;
+  }
+
+  .admin-main .promotion-filter-tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: thin;
+  }
+
+  .admin-main .promotion-filter-tabs button {
+    flex: 0 0 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-main > .business-page,
+  .admin-main > .print-report-page,
+  .admin-main > .promotions-page {
+    animation: none;
+  }
+}

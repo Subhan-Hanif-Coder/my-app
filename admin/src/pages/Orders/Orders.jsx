@@ -332,13 +332,18 @@ const Orders = ({ url, adminKey, completedOnly = false }) => {
   }, [activeTab, debouncedSearch, page, pageSize, url]);
 
   const statusHandler = useCallback(async (event, orderId) => {
+    const nextStatus = event.target.value;
     try {
       const response = await axios.post(url + "/api/order/status", {
         orderId,
-        status: event.target.value
+        status: nextStatus
       })
       if (response.data.success) {
-        toast.success("Order status updated successfully");
+        if (nextStatus === "Delivered" && response.data.emailNotificationSent === false) {
+          toast.error("Order status updated, but the customer notification email could not be sent. Check backend email settings.");
+        } else {
+          toast.success("Order status updated successfully");
+        }
         await fetchAllOrders();
       } else {
         toast.error(response.data?.message || "Failed to update status");
@@ -570,7 +575,7 @@ const Orders = ({ url, adminKey, completedOnly = false }) => {
                         <span className="bill-title">Total bill</span>
                         <p className="bill-val">${Number(order.amount || 0).toFixed(2)}</p>
                         <span className={`pay-badge-dark ${order.payment ? 'paid' : 'pending'}`}>
-                          {order.payment ? "🟢 Paid online" : "🟡 Payment pending"}
+                          {order.payment ? "🟢 Paid online" : order.paymentMethod === "cod" ? "🟡 Cash on delivery" : "🟡 Payment pending"}
                         </span>
                       </div>
 
